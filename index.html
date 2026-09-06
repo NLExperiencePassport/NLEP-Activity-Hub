@@ -9,7 +9,7 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>NL Experience Passport Activity Hub</title>
+  <title>NLEP Activity List</title>
 
   <style>
     :root {
@@ -230,10 +230,10 @@
       overflow: hidden;
       background:
         linear-gradient(
-          rgba(233, 239, 243, 0.78),
-          rgba(226, 234, 239, 0.84)
+          rgba(233, 239, 243, 0.55),
+          rgba(226, 234, 239, 0.62)
         ),
-        url("https://commons.wikimedia.org/wiki/Special:Redirect/file/Cape_Spear_Newfoundland_(26493512457).jpg?width=1920");
+        url("images/20260904_165815.jpg");
       background-size: cover;
       background-position: center center;
       background-repeat: no-repeat;
@@ -244,9 +244,9 @@
     }
 
     .activities-inner {
-      max-width: 1150px;
+      max-width: 1380px;
       margin: 0 auto;
-      padding: 46px 20px 64px;
+      padding: 38px 20px 54px;
     }
 
     .result-count {
@@ -276,11 +276,8 @@
 
     .activity-grid {
       display: grid;
-      grid-template-columns: repeat(
-        auto-fit,
-        minmax(300px, 1fr)
-      );
-      gap: 20px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
     }
 
     .activity-grid.list-view {
@@ -291,10 +288,10 @@
       display: flex;
       flex-direction: column;
       background-color: var(--white);
-      padding: 22px;
+      padding: 16px;
       border: 1px solid #e8e8e8;
-      border-top: 5px solid transparent;
-      border-radius: 16px;
+      border-top: 4px solid transparent;
+      border-radius: 14px;
       box-shadow: 0 8px 24px rgba(38, 52, 61, 0.08);
       transition:
         transform 0.2s ease,
@@ -334,14 +331,15 @@
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 15px;
+      gap: 8px;
+      margin-bottom: 11px;
+      flex-wrap: wrap;
     }
 
     .activity-card h2 {
       margin: 0;
-      font-size: 21px;
-      line-height: 1.3;
+      font-size: 18px;
+      line-height: 1.22;
       color: #252525;
     }
 
@@ -349,9 +347,9 @@
     .location-tag {
       display: inline-block;
       width: fit-content;
-      padding: 7px 11px;
-      border-radius: 20px;
-      font-size: 12px;
+      padding: 6px 9px;
+      border-radius: 18px;
+      font-size: 11px;
       font-weight: bold;
     }
 
@@ -383,34 +381,36 @@
     }
 
     .card-details {
-      margin: 16px 0;
+      margin: 10px 0;
+      font-size: 14px;
     }
 
     .detail-row {
       display: flex;
       align-items: flex-start;
-      gap: 10px;
-      margin: 11px 0;
-      line-height: 1.45;
+      gap: 8px;
+      margin: 7px 0;
+      line-height: 1.35;
     }
 
     .detail-icon {
-      width: 22px;
+      width: 20px;
       flex-shrink: 0;
       text-align: center;
     }
 
     .description {
       flex-grow: 1;
-      margin: 5px 0 0;
+      margin: 3px 0 0;
       color: #555555;
-      line-height: 1.55;
+      font-size: 14px;
+      line-height: 1.42;
     }
 
     .activity-link {
       display: block;
-      margin-top: 20px;
-      padding: 12px;
+      margin-top: 14px;
+      padding: 10px 12px;
       background-color: var(--brand);
       color: var(--white);
       border-radius: 9px;
@@ -502,6 +502,19 @@
       background-color: #fee2e2;
     }
 
+
+    @media (max-width: 1150px) {
+      .activity-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 860px) {
+      .activity-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
     @media (max-width: 650px) {
       header {
         min-height: 410px;
@@ -563,10 +576,10 @@
   <header>
     <div class="hero-content">
       <span class="header-label">
-        NL EXPERIENCE PASSPORT
+        YOUR NEXT DESTINATION
       </span>
 
-      <h1>Your Next Destination</h1>
+      <h1>NLEP Activity List</h1>
 
       <p>
         <span class="header-motto">
@@ -758,21 +771,13 @@
       </a>.
 
       <small class="photo-credit">
-        Photos:
+        Header photo:
         <a
           href="https://commons.wikimedia.org/wiki/File:Signal_Hill_St_John_Harbour_Newfoundland_(40469269265).jpg"
           target="_blank"
           rel="noopener noreferrer"
         >
           Signal Hill
-        </a>
-        &
-        <a
-          href="https://commons.wikimedia.org/wiki/File:Cape_Spear_Newfoundland_(26493512457).jpg"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Cape Spear
         </a>
         — Michel Rathwell / CC BY 2.0
       </small>

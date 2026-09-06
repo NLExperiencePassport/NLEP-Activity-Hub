@@ -32,6 +32,7 @@
       font-family: "Avenir Next", Avenir,
         -apple-system, BlinkMacSystemFont,
         "Segoe UI", Arial, sans-serif;
+
       background:
         radial-gradient(
           circle at top left,
@@ -43,6 +44,7 @@
           #f1f4f6 0,
           var(--background) 460px
         );
+
       background-attachment: fixed;
       color: var(--text);
     }
@@ -50,86 +52,140 @@
     header {
       min-height: 440px;
       padding: 58px 20px;
+
       display: flex;
       align-items: center;
       justify-content: center;
+
       background:
         linear-gradient(
           rgba(10, 25, 36, 0.25),
           rgba(12, 30, 42, 0.58)
         ),
         url("https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Signal_Hill_St_John_Harbour_Newfoundland_%2840469269265%29.jpg/1280px-Signal_Hill_St_John_Harbour_Newfoundland_%2840469269265%29.jpg");
+
       background-size: cover;
       background-position: center 53%;
+
       color: var(--white);
       text-align: center;
+
       border-bottom: 6px solid rgba(255, 255, 255, 0.82);
-      box-shadow: 0 8px 28px rgba(38, 52, 61, 0.18);
+
+      box-shadow:
+        0 8px 28px rgba(38, 52, 61, 0.18);
     }
 
     .hero-content {
       width: min(770px, 100%);
+
       padding: 34px 40px 37px;
-      background-color: rgba(18, 34, 45, 0.70);
-      border: 1px solid rgba(255, 255, 255, 0.34);
+
+      background-color:
+        rgba(18, 34, 45, 0.70);
+
+      border:
+        1px solid rgba(255, 255, 255, 0.34);
+
       border-radius: 22px;
-      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.28);
+
+      box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.28);
+
       backdrop-filter: blur(4px);
       -webkit-backdrop-filter: blur(4px);
     }
 
     .header-label {
       display: inline-block;
+
       margin-bottom: 18px;
+
       padding: 8px 15px;
-      background-color: rgba(255, 255, 255, 0.94);
+
+      background-color:
+        rgba(255, 255, 255, 0.94);
+
       color: #26343d;
+
       border-radius: 999px;
-      font-size: clamp(14px, 1.8vw, 17px);
+
+      font-size:
+        clamp(14px, 1.8vw, 17px);
+
       font-weight: 700;
+
       letter-spacing: 1.7px;
     }
 
     header h1 {
       margin: 0 0 16px;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(43px, 6vw, 64px);
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size:
+        clamp(43px, 6vw, 64px);
+
       font-weight: 700;
+
       line-height: 1.08;
+
       letter-spacing: -0.5px;
-      text-shadow: 0 3px 18px rgba(0, 0, 0, 0.30);
+
+      text-shadow:
+        0 3px 18px rgba(0, 0, 0, 0.30);
     }
 
     header p {
       max-width: 680px;
+
       margin: 0 auto;
+
       font-size: 18px;
+
       line-height: 1.55;
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+
+      text-shadow:
+        0 2px 10px rgba(0, 0, 0, 0.35);
     }
 
     .header-motto {
       display: block;
+
       margin-bottom: 7px;
+
       font-size: 20px;
+
       font-weight: 650;
     }
 
     .header-description {
-      color: rgba(255, 255, 255, 0.92);
+      color:
+        rgba(255, 255, 255, 0.92);
     }
 
     main {
       max-width: 1150px;
+
       margin: auto;
-      padding: 38px 20px 26px;
+
+      padding:
+        38px 20px 26px;
     }
 
     .search-controls {
       display: grid;
-      grid-template-columns: 1fr auto;
+
+      grid-template-columns:
+        1fr auto;
+
       gap: 10px;
+
       align-items: stretch;
+
       margin-bottom: 14px;
     }
 
@@ -139,24 +195,39 @@
 
     .filter-toggle {
       min-width: 130px;
+
       padding: 13px 16px;
-      background-color: var(--brand);
-      color: var(--white);
-      border: 1px solid var(--brand);
+
+      background-color:
+        var(--brand);
+
+      color:
+        var(--white);
+
+      border:
+        1px solid var(--brand);
+
       border-radius: 10px;
+
       font-size: 15px;
+
       font-weight: 700;
+
       cursor: pointer;
     }
 
     .filter-toggle:hover {
-      background-color: var(--brand-dark);
+      background-color:
+        var(--brand-dark);
     }
 
     .filters-panel {
       overflow: hidden;
+
       max-height: 600px;
+
       opacity: 1;
+
       transition:
         max-height 0.28s ease,
         opacity 0.22s ease,
@@ -165,8 +236,11 @@
 
     .filters-panel.collapsed {
       max-height: 0;
+
       opacity: 0;
+
       margin: 0;
+
       pointer-events: none;
     }
 
@@ -179,317 +253,540 @@
     input,
     select {
       width: 100%;
+
       padding: 14px;
+
       font-size: 15px;
-      background-color: var(--white);
-      border: 1px solid var(--border);
+
+      background-color:
+        var(--white);
+
+      border:
+        1px solid var(--border);
+
       border-radius: 10px;
     }
 
     input:focus,
     select:focus {
-      border-color: var(--brand);
-      outline: 3px solid rgba(61, 75, 87, 0.14);
+      border-color:
+        var(--brand);
+
+      outline:
+        3px solid rgba(61, 75, 87, 0.14);
     }
 
     .filters {
       display: grid;
-      grid-template-columns: repeat(
-        auto-fit,
-        minmax(165px, 1fr)
-      );
+
+      grid-template-columns:
+        repeat(
+          auto-fit,
+          minmax(165px, 1fr)
+        );
+
       gap: 12px;
+
       margin-bottom: 24px;
     }
 
     .clear-button {
       padding: 13px;
-      background-color: var(--white);
-      color: var(--brand);
-      border: 1px solid var(--brand);
+
+      background-color:
+        var(--white);
+
+      color:
+        var(--brand);
+
+      border:
+        1px solid var(--brand);
+
       border-radius: 10px;
+
       font-size: 15px;
+
       font-weight: bold;
+
       cursor: pointer;
     }
 
     .clear-button:hover {
-      background-color: var(--brand-soft);
+      background-color:
+        var(--brand-soft);
     }
 
     .results-bar {
       display: flex;
+
       align-items: center;
-      justify-content: space-between;
+
+      justify-content:
+        space-between;
+
       gap: 15px;
+
       margin-bottom: 0;
     }
 
     .activities-section {
       position: relative;
+
       overflow: hidden;
+
       background:
         linear-gradient(
           rgba(233, 239, 243, 0.55),
           rgba(226, 234, 239, 0.62)
         ),
         url("images/20260904_165815.jpg");
+
       background-size: cover;
-      background-position: center center;
-      background-repeat: no-repeat;
-      /* IMPORTANT: static background; no parallax/fixed effect */
-      background-attachment: scroll;
-      border-top: 1px solid rgba(61, 75, 87, 0.10);
-      border-bottom: 1px solid rgba(61, 75, 87, 0.12);
+
+      background-position:
+        center center;
+
+      background-repeat:
+        no-repeat;
+
+      background-attachment:
+        scroll;
+
+      border-top:
+        1px solid rgba(61, 75, 87, 0.10);
+
+      border-bottom:
+        1px solid rgba(61, 75, 87, 0.12);
     }
 
     .activities-inner {
       max-width: 1380px;
+
       margin: 0 auto;
-      padding: 38px 20px 54px;
+
+      padding:
+        38px 20px 54px;
     }
 
     .result-count {
       margin: 0;
-      color: var(--soft-text);
+
+      color:
+        var(--soft-text);
     }
 
     .view-buttons {
       display: flex;
+
       gap: 7px;
     }
 
     .view-button {
       padding: 8px 12px;
-      background-color: var(--white);
+
+      background-color:
+        var(--white);
+
       color: #555555;
-      border: 1px solid var(--border);
+
+      border:
+        1px solid var(--border);
+
       border-radius: 8px;
+
       cursor: pointer;
     }
 
     .view-button.active {
-      background-color: var(--brand);
-      color: var(--white);
-      border-color: var(--brand);
+      background-color:
+        var(--brand);
+
+      color:
+        var(--white);
+
+      border-color:
+        var(--brand);
     }
 
     .activity-grid {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+
+      grid-template-columns:
+        repeat(
+          4,
+          minmax(0, 1fr)
+        );
+
       gap: 16px;
+    }
+
+    .activity-grid.results-1 {
+      grid-template-columns:
+        minmax(0, 276px);
+
+      justify-content: center;
+    }
+
+    .activity-grid.results-2 {
+      grid-template-columns:
+        repeat(
+          2,
+          minmax(0, 276px)
+        );
+
+      justify-content: center;
+    }
+
+    .activity-grid.results-3 {
+      grid-template-columns:
+        repeat(
+          3,
+          minmax(0, 276px)
+        );
+
+      justify-content: center;
     }
 
     .activity-grid.list-view {
       grid-template-columns: 1fr;
+
+      justify-content: stretch;
     }
 
     .activity-card {
       display: flex;
+
       flex-direction: column;
-      background-color: var(--white);
+
+      background-color:
+        var(--white);
+
       padding: 16px;
-      border: 1px solid #e8e8e8;
-      border-top: 4px solid transparent;
+
+      border:
+        1px solid #e8e8e8;
+
+      border-top:
+        4px solid transparent;
+
       border-radius: 14px;
-      box-shadow: 0 8px 24px rgba(38, 52, 61, 0.08);
+
+      box-shadow:
+        0 8px 24px rgba(38, 52, 61, 0.08);
+
       transition:
         transform 0.2s ease,
         box-shadow 0.2s ease;
     }
 
     .activity-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 13px 30px rgba(38, 52, 61, 0.13);
+      transform:
+        translateY(-3px);
+
+      box-shadow:
+        0 13px 30px rgba(38, 52, 61, 0.13);
     }
 
     .card-community {
-      background-color: #fff3f8;
-      border-color: #f2d3e0;
-      border-top-color: #c4326a;
+      background-color:
+        #fff3f8;
+
+      border-color:
+        #f2d3e0;
+
+      border-top-color:
+        #c4326a;
     }
 
     .card-career {
-      background-color: #fff9e8;
-      border-color: #efdfab;
-      border-top-color: #bd790d;
+      background-color:
+        #fff9e8;
+
+      border-color:
+        #efdfab;
+
+      border-top-color:
+        #bd790d;
     }
 
     .card-social {
-      background-color: #f0faf4;
-      border-color: #cce7d7;
-      border-top-color: #2f8157;
+      background-color:
+        #f0faf4;
+
+      border-color:
+        #cce7d7;
+
+      border-top-color:
+        #2f8157;
     }
 
     .card-civic {
-      background-color: #f2f7fd;
-      border-color: #d1e0f2;
-      border-top-color: #3d73aa;
+      background-color:
+        #f2f7fd;
+
+      border-color:
+        #d1e0f2;
+
+      border-top-color:
+        #3d73aa;
     }
 
     .card-top {
       display: flex;
+
       align-items: flex-start;
-      justify-content: space-between;
+
+      justify-content:
+        space-between;
+
       gap: 8px;
+
       margin-bottom: 11px;
+
       flex-wrap: wrap;
     }
 
     .activity-card h2 {
       margin: 0;
+
       font-size: 18px;
+
       line-height: 1.22;
+
       color: #252525;
     }
 
     .category-tag,
     .location-tag {
       display: inline-block;
+
       width: fit-content;
+
       padding: 6px 9px;
+
       border-radius: 18px;
+
       font-size: 11px;
+
       font-weight: bold;
     }
 
     .category-community {
-      background-color: #f7dbe8;
-      color: #9d174d;
+      background-color:
+        #f7dbe8;
+
+      color:
+        #9d174d;
     }
 
     .category-career {
-      background-color: #fbe9ad;
-      color: #92400e;
+      background-color:
+        #fbe9ad;
+
+      color:
+        #92400e;
     }
 
     .category-social {
-      background-color: #d2eddc;
-      color: #166534;
+      background-color:
+        #d2eddc;
+
+      color:
+        #166534;
     }
 
     .category-civic {
-      background-color: #d8e7f7;
-      color: #1e40af;
+      background-color:
+        #d8e7f7;
+
+      color:
+        #1e40af;
     }
 
     .location-on-campus,
     .location-off-campus,
     .location-online {
-      background-color: #e8edf1;
-      color: #3d4952;
+      background-color:
+        #e8edf1;
+
+      color:
+        #3d4952;
     }
 
     .card-details {
-      margin: 10px 0;
+      margin:
+        10px 0;
+
       font-size: 14px;
     }
 
     .detail-row {
       display: flex;
+
       align-items: flex-start;
+
       gap: 8px;
-      margin: 7px 0;
+
+      margin:
+        7px 0;
+
       line-height: 1.35;
     }
 
     .detail-icon {
       width: 20px;
+
       flex-shrink: 0;
+
       text-align: center;
     }
 
     .description {
       flex-grow: 1;
-      margin: 3px 0 0;
-      color: #555555;
-      font-size: 14px;
-      line-height: 1.42;
+
+      margin:
+        3px 0 0;
+
+      color:
+        #555555;
+
+      font-size:
+        14px;
+
+      line-height:
+        1.42;
     }
 
     .activity-link {
       display: block;
-      margin-top: 14px;
-      padding: 10px 12px;
-      background-color: var(--brand);
-      color: var(--white);
-      border-radius: 9px;
+
+      margin-top:
+        14px;
+
+      padding:
+        10px 12px;
+
+      background-color:
+        var(--brand);
+
+      color:
+        var(--white);
+
+      border-radius:
+        9px;
+
       text-align: center;
+
       text-decoration: none;
+
       font-weight: bold;
     }
 
     .card-community .activity-link {
-      background-color: #b4265c;
+      background-color:
+        #b4265c;
     }
 
     .card-community .activity-link:hover {
-      background-color: #8f1947;
+      background-color:
+        #8f1947;
     }
 
     .card-career .activity-link {
-      background-color: #a9670b;
+      background-color:
+        #a9670b;
     }
 
     .card-career .activity-link:hover {
-      background-color: #855006;
+      background-color:
+        #855006;
     }
 
     .card-social .activity-link {
-      background-color: #27754e;
+      background-color:
+        #27754e;
     }
 
     .card-social .activity-link:hover {
-      background-color: #1d5b3b;
+      background-color:
+        #1d5b3b;
     }
 
     .card-civic .activity-link {
-      background-color: #356ca3;
+      background-color:
+        #356ca3;
     }
 
     .card-civic .activity-link:hover {
-      background-color: #27547f;
+      background-color:
+        #27547f;
     }
 
     .site-footer {
-      padding: 24px 20px 22px;
-      background-color: #26343d;
-      color: rgba(255, 255, 255, 0.88);
+      padding:
+        24px 20px 22px;
+
+      background-color:
+        #26343d;
+
+      color:
+        rgba(255, 255, 255, 0.88);
+
       text-align: center;
     }
 
     .site-footer p {
       margin: 0;
+
       line-height: 1.65;
     }
 
     .site-footer a {
-      color: #ffffff;
+      color:
+        #ffffff;
+
       font-weight: 700;
-      text-decoration-thickness: 1px;
-      text-underline-offset: 3px;
+
+      text-decoration-thickness:
+        1px;
+
+      text-underline-offset:
+        3px;
     }
 
     .photo-credit {
       display: block;
+
       margin-top: 11px;
-      color: rgba(255, 255, 255, 0.56);
+
+      color:
+        rgba(255, 255, 255, 0.56);
+
       font-size: 10px;
     }
 
     .photo-credit a {
       color: inherit;
+
       font-weight: 400;
     }
 
     .loading,
     .empty-message,
     .error-message {
-      padding: 40px 20px;
-      background-color: var(--white);
-      border-radius: 14px;
+      padding:
+        40px 20px;
+
+      background-color:
+        var(--white);
+
+      border-radius:
+        14px;
+
       text-align: center;
-      color: var(--soft-text);
+
+      color:
+        var(--soft-text);
     }
 
     .empty-message,
@@ -498,74 +795,145 @@
     }
 
     .error-message {
-      color: #991b1b;
-      background-color: #fee2e2;
+      color:
+        #991b1b;
+
+      background-color:
+        #fee2e2;
     }
 
-
-    @media (max-width: 1150px) {
+    @media (max-width: 1180px) {
       .activity-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns:
+          repeat(
+            3,
+            minmax(0, 1fr)
+          );
+      }
+
+      .activity-grid.results-1 {
+        grid-template-columns:
+          minmax(0, 300px);
+      }
+
+      .activity-grid.results-2 {
+        grid-template-columns:
+          repeat(
+            2,
+            minmax(0, 300px)
+          );
+      }
+
+      .activity-grid.results-3 {
+        grid-template-columns:
+          repeat(
+            3,
+            minmax(0, 300px)
+          );
       }
     }
 
-    @media (max-width: 860px) {
+    @media (max-width: 820px) {
       .activity-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns:
+          repeat(
+            2,
+            minmax(0, 1fr)
+          );
+      }
+
+      .activity-grid.results-1 {
+        grid-template-columns:
+          minmax(0, 320px);
+      }
+
+      .activity-grid.results-2,
+      .activity-grid.results-3 {
+        grid-template-columns:
+          repeat(
+            2,
+            minmax(0, 1fr)
+          );
       }
     }
 
     @media (max-width: 650px) {
       header {
-        min-height: 410px;
-        padding: 35px 16px;
-        background-position: center;
+        min-height:
+          410px;
+
+        padding:
+          35px 16px;
+
+        background-position:
+          center;
       }
 
       .hero-content {
-        padding: 28px 20px 31px;
-        border-radius: 17px;
+        padding:
+          28px 20px 31px;
+
+        border-radius:
+          17px;
       }
 
       header h1 {
-        font-size: 42px;
+        font-size:
+          42px;
       }
 
       header p {
-        font-size: 16px;
+        font-size:
+          16px;
       }
 
       .header-motto {
-        font-size: 18px;
+        font-size:
+          18px;
       }
 
       main {
-        padding: 24px 15px 24px;
+        padding:
+          24px 15px 24px;
       }
 
       .search-controls {
-        grid-template-columns: 1fr;
+        grid-template-columns:
+          1fr;
       }
 
       .filter-toggle {
-        width: 100%;
+        width:
+          100%;
       }
 
       .activities-inner {
-        padding: 34px 15px 46px;
+        padding:
+          34px 15px 46px;
       }
 
       .activities-section {
-        background-position: center top;
+        background-position:
+          center top;
       }
 
       .results-bar {
-        align-items: flex-start;
-        flex-direction: column;
+        align-items:
+          flex-start;
+
+        flex-direction:
+          column;
       }
 
-      .activity-grid {
-        grid-template-columns: 1fr;
+      .activity-grid,
+      .activity-grid.results-1,
+      .activity-grid.results-2,
+      .activity-grid.results-3 {
+        grid-template-columns:
+          1fr;
+
+        justify-content:
+          stretch;
       }
     }
   </style>
@@ -575,13 +943,17 @@
 
   <header>
     <div class="hero-content">
+
       <span class="header-label">
         YOUR NEXT DESTINATION
       </span>
 
-      <h1>NLEP Activity List</h1>
+      <h1>
+        NLEP Activity List
+      </h1>
 
       <p>
+
         <span class="header-motto">
           Explore. Connect. Engage. Grow.
         </span>
@@ -590,19 +962,24 @@
           Discover activities, build connections, and make
           the most of your experience in Newfoundland and Labrador.
         </span>
+
       </p>
+
     </div>
   </header>
 
   <main>
 
     <div class="search-controls">
+
       <div class="search-box">
+
         <input
           id="searchInput"
           type="search"
           placeholder="🔎 Search by activity, location, or keyword..."
         >
+
       </div>
 
       <button
@@ -614,79 +991,123 @@
       >
         Show filters
       </button>
+
     </div>
 
     <div
       class="filters-panel collapsed"
       id="filtersPanel"
     >
+
       <div class="filters">
 
-      <select id="categoryFilter">
-        <option value="All">All categories</option>
+        <select id="categoryFilter">
 
-        <option value="Community & Culture">
-          Community & Culture
-        </option>
+          <option value="All">
+            All categories
+          </option>
 
-        <option value="Career & Integration">
-          Career & Integration
-        </option>
+          <option value="Community & Culture">
+            Community & Culture
+          </option>
 
-        <option value="Social & Wellbeing">
-          Social & Wellbeing
-        </option>
+          <option value="Career & Integration">
+            Career & Integration
+          </option>
 
-        <option value="Civic Engagement">
-          Civic Engagement
-        </option>
-      </select>
+          <option value="Social & Wellbeing">
+            Social & Wellbeing
+          </option>
 
-      <select id="locationFilter">
-        <option value="All">All locations</option>
-        <option value="On campus">On campus</option>
-        <option value="Off campus">Off campus</option>
-        <option value="Online">Online</option>
-      </select>
+          <option value="Civic Engagement">
+            Civic Engagement
+          </option>
 
-      <select id="monthFilter">
-        <option value="All">All months</option>
-        <option value="September">September</option>
-        <option value="October">October</option>
-        <option value="November">November</option>
-        <option value="December">December</option>
-      </select>
+        </select>
 
-      <select id="frequencyFilter">
-        <option value="All">
-          One-time and recurring
-        </option>
+        <select id="locationFilter">
 
-        <option value="One-time">One-time</option>
-        <option value="Recurring">Recurring</option>
-      </select>
+          <option value="All">
+            All locations
+          </option>
 
-      <select id="registrationFilter">
-        <option value="All">
-          Any registration
-        </option>
+          <option value="On campus">
+            On campus
+          </option>
 
-        <option value="Required">
-          Registration required
-        </option>
+          <option value="Off campus">
+            Off campus
+          </option>
 
-        <option value="Not required">
-          Registration not required
-        </option>
-      </select>
+          <option value="Online">
+            Online
+          </option>
 
-      <button
-        class="clear-button"
-        id="clearFilters"
-        type="button"
-      >
-        Clear filters
-      </button>
+        </select>
+
+        <select id="monthFilter">
+
+          <option value="All">
+            All months
+          </option>
+
+          <option value="September">
+            September
+          </option>
+
+          <option value="October">
+            October
+          </option>
+
+          <option value="November">
+            November
+          </option>
+
+          <option value="December">
+            December
+          </option>
+
+        </select>
+
+        <select id="frequencyFilter">
+
+          <option value="All">
+            One-time and recurring
+          </option>
+
+          <option value="One-time">
+            One-time
+          </option>
+
+          <option value="Recurring">
+            Recurring
+          </option>
+
+        </select>
+
+        <select id="registrationFilter">
+
+          <option value="All">
+            Any registration
+          </option>
+
+          <option value="Required">
+            Registration required
+          </option>
+
+          <option value="Not required">
+            Registration not required
+          </option>
+
+        </select>
+
+        <button
+          class="clear-button"
+          id="clearFilters"
+          type="button"
+        >
+          Clear filters
+        </button>
 
       </div>
     </div>
@@ -724,7 +1145,11 @@
 
   </main>
 
-  <section class="activities-section" aria-label="Activities">
+  <section
+    class="activities-section"
+    aria-label="Activities"
+  >
+
     <div class="activities-inner">
 
       <div
@@ -755,23 +1180,35 @@
       </div>
 
     </div>
+
   </section>
 
   <footer class="site-footer">
+
     <p>
-      <strong>Questions? We’re happy to help!</strong><br>
+
+      <strong>
+        Questions? We’re happy to help!
+      </strong>
+
+      <br>
 
       Contact us at
+
       <a href="mailto:arrivals@mun.ca">
         arrivals@mun.ca
       </a>
+
       or
+
       <a href="mailto:crandriamaha@mun.ca">
         crandriamaha@mun.ca
       </a>.
 
       <small class="photo-credit">
+
         Header photo:
+
         <a
           href="https://commons.wikimedia.org/wiki/File:Signal_Hill_St_John_Harbour_Newfoundland_(40469269265).jpg"
           target="_blank"
@@ -779,70 +1216,110 @@
         >
           Signal Hill
         </a>
+
         — Michel Rathwell / CC BY 2.0
+
       </small>
+
     </p>
+
   </footer>
 
   <script>
+
     const sheetURL =
       "https://docs.google.com/spreadsheets/d/e/2PACX-1vQARdvW0HUWWlESQ601ZcBKG3Ti0IR-P6C5hlPpFi7j2Eo5co-U1v3xHOKlA4AY6uhgmoebFB5VhoUJ/pub?gid=0&single=true&output=csv";
 
     let activities = [];
 
     const searchInput =
-      document.getElementById("searchInput");
+      document.getElementById(
+        "searchInput"
+      );
 
     const categoryFilter =
-      document.getElementById("categoryFilter");
+      document.getElementById(
+        "categoryFilter"
+      );
 
     const locationFilter =
-      document.getElementById("locationFilter");
+      document.getElementById(
+        "locationFilter"
+      );
 
     const monthFilter =
-      document.getElementById("monthFilter");
+      document.getElementById(
+        "monthFilter"
+      );
 
     const frequencyFilter =
-      document.getElementById("frequencyFilter");
+      document.getElementById(
+        "frequencyFilter"
+      );
 
     const registrationFilter =
-      document.getElementById("registrationFilter");
+      document.getElementById(
+        "registrationFilter"
+      );
 
     const clearFilters =
-      document.getElementById("clearFilters");
+      document.getElementById(
+        "clearFilters"
+      );
 
     const filterToggle =
-      document.getElementById("filterToggle");
+      document.getElementById(
+        "filterToggle"
+      );
 
     const filtersPanel =
-      document.getElementById("filtersPanel");
+      document.getElementById(
+        "filtersPanel"
+      );
 
     const activityGrid =
-      document.getElementById("activityGrid");
+      document.getElementById(
+        "activityGrid"
+      );
 
     const resultCount =
-      document.getElementById("resultCount");
+      document.getElementById(
+        "resultCount"
+      );
 
     const loadingMessage =
-      document.getElementById("loadingMessage");
+      document.getElementById(
+        "loadingMessage"
+      );
 
     const emptyMessage =
-      document.getElementById("emptyMessage");
+      document.getElementById(
+        "emptyMessage"
+      );
 
     const errorMessage =
-      document.getElementById("errorMessage");
+      document.getElementById(
+        "errorMessage"
+      );
 
     const cardViewButton =
-      document.getElementById("cardViewButton");
+      document.getElementById(
+        "cardViewButton"
+      );
 
     const listViewButton =
-      document.getElementById("listViewButton");
+      document.getElementById(
+        "listViewButton"
+      );
 
     function parseCSV(text) {
+
       const rows = [];
 
       let row = [];
+
       let cell = "";
+
       let insideQuotes = false;
 
       for (
@@ -850,24 +1327,39 @@
         index < text.length;
         index++
       ) {
-        const character = text[index];
-        const nextCharacter = text[index + 1];
+
+        const character =
+          text[index];
+
+        const nextCharacter =
+          text[index + 1];
 
         if (
           character === '"' &&
           insideQuotes &&
           nextCharacter === '"'
         ) {
+
           cell += '"';
+
           index++;
-        } else if (character === '"') {
-          insideQuotes = !insideQuotes;
+
+        } else if (
+          character === '"'
+        ) {
+
+          insideQuotes =
+            !insideQuotes;
+
         } else if (
           character === "," &&
           !insideQuotes
         ) {
+
           row.push(cell);
+
           cell = "";
+
         } else if (
           (
             character === "\n" ||
@@ -875,6 +1367,7 @@
           ) &&
           !insideQuotes
         ) {
+
           if (
             character === "\r" &&
             nextCharacter === "\n"
@@ -883,288 +1376,616 @@
           }
 
           row.push(cell);
+
           rows.push(row);
 
           row = [];
+
           cell = "";
+
         } else {
+
           cell += character;
+
         }
       }
 
-      if (cell.length > 0 || row.length > 0) {
+      if (
+        cell.length > 0 ||
+        row.length > 0
+      ) {
+
         row.push(cell);
+
         rows.push(row);
+
       }
 
       return rows;
     }
 
     function cleanText(value) {
-      return String(value || "").trim();
+
+      return String(
+        value || ""
+      ).trim();
+
     }
 
     function safeURL(value) {
+
       try {
-        const url = new URL(value);
+
+        const url =
+          new URL(value);
 
         if (
           url.protocol === "http:" ||
           url.protocol === "https:"
         ) {
+
           return url.href;
+
         }
+
       } catch (error) {
+
         return "#";
+
       }
 
       return "#";
     }
 
     function escapeHTML(value) {
+
       return cleanText(value)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
+
+        .replaceAll(
+          "&",
+          "&amp;"
+        )
+
+        .replaceAll(
+          "<",
+          "&lt;"
+        )
+
+        .replaceAll(
+          ">",
+          "&gt;"
+        )
+
+        .replaceAll(
+          '"',
+          "&quot;"
+        )
+
+        .replaceAll(
+          "'",
+          "&#039;"
+        );
     }
 
-    function getCategoryClass(category) {
-      if (category === "Community & Culture") {
-        return "category-community";
+    function getCategoryClass(
+      category
+    ) {
+
+      if (
+        category ===
+        "Community & Culture"
+      ) {
+
+        return
+          "category-community";
+
       }
 
-      if (category === "Career & Integration") {
-        return "category-career";
+      if (
+        category ===
+        "Career & Integration"
+      ) {
+
+        return
+          "category-career";
+
       }
 
-      if (category === "Social & Wellbeing") {
-        return "category-social";
+      if (
+        category ===
+        "Social & Wellbeing"
+      ) {
+
+        return
+          "category-social";
+
       }
 
-      return "category-civic";
+      return
+        "category-civic";
     }
 
-    function getCategoryCardClass(category) {
-      if (category === "Community & Culture") {
-        return "card-community";
+    function getCategoryCardClass(
+      category
+    ) {
+
+      if (
+        category ===
+        "Community & Culture"
+      ) {
+
+        return
+          "card-community";
+
       }
 
-      if (category === "Career & Integration") {
-        return "card-career";
+      if (
+        category ===
+        "Career & Integration"
+      ) {
+
+        return
+          "card-career";
+
       }
 
-      if (category === "Social & Wellbeing") {
-        return "card-social";
+      if (
+        category ===
+        "Social & Wellbeing"
+      ) {
+
+        return
+          "card-social";
+
       }
 
-      return "card-civic";
+      return
+        "card-civic";
     }
 
-    function getLocationClass(locationType) {
-      if (locationType === "On campus") {
-        return "location-on-campus";
+    function getLocationClass(
+      locationType
+    ) {
+
+      if (
+        locationType ===
+        "On campus"
+      ) {
+
+        return
+          "location-on-campus";
+
       }
 
-      if (locationType === "Off campus") {
-        return "location-off-campus";
+      if (
+        locationType ===
+        "Off campus"
+      ) {
+
+        return
+          "location-off-campus";
+
       }
 
-      return "location-online";
+      return
+        "location-online";
     }
 
     async function loadActivities() {
+
       try {
-        const response = await fetch(sheetURL, {
-          cache: "no-store"
-        });
+
+        const response =
+          await fetch(
+            sheetURL,
+            {
+              cache:
+                "no-store"
+            }
+          );
 
         if (!response.ok) {
+
           throw new Error(
             "Google Sheet could not be loaded."
           );
+
         }
 
-        const csvText = await response.text();
-        const rows = parseCSV(csvText);
+        const csvText =
+          await response.text();
 
-        const headers = rows
-          .shift()
-          .map(function(header) {
-            return cleanText(header)
-              .replace(/^\uFEFF/, "");
-          });
+        const rows =
+          parseCSV(csvText);
 
-        activities = rows
-          .filter(function(row) {
-            return row.some(function(cell) {
-              return cleanText(cell) !== "";
-            });
-          })
-          .map(function(row) {
-            const item = {};
+        const headers =
+          rows
 
-            headers.forEach(function(header, index) {
-              item[header] = cleanText(row[index]);
-            });
+            .shift()
 
-            return {
-              frequency: item["Frequency"],
-              locationType: item["Location Type"],
-              location: item["Location"],
-              category: item["Category"],
-              name: item["Activity Name"],
-              link: item["Activity Link"],
+            .map(
+              function(header) {
 
-              months: item["Months"]
-                .split(",")
-                .map(function(month) {
-                  return month.trim();
-                }),
+                return cleanText(
+                  header
+                ).replace(
+                  /^\uFEFF/,
+                  ""
+                );
 
-              date: item["Date"],
-              time: item["Time"],
-              registration: item["Registration"],
-              description: item["Description"]
-            };
-          });
+              }
+            );
 
-        loadingMessage.style.display = "none";
-        errorMessage.style.display = "none";
+        activities =
+          rows
 
-        displayActivities(activities);
+            .filter(
+              function(row) {
+
+                return row.some(
+                  function(cell) {
+
+                    return cleanText(
+                      cell
+                    ) !== "";
+
+                  }
+                );
+
+              }
+            )
+
+            .map(
+              function(row) {
+
+                const item = {};
+
+                headers.forEach(
+                  function(
+                    header,
+                    index
+                  ) {
+
+                    item[header] =
+                      cleanText(
+                        row[index]
+                      );
+
+                  }
+                );
+
+                return {
+
+                  frequency:
+                    item["Frequency"],
+
+                  locationType:
+                    item["Location Type"],
+
+                  location:
+                    item["Location"],
+
+                  category:
+                    item["Category"],
+
+                  name:
+                    item["Activity Name"],
+
+                  link:
+                    item["Activity Link"],
+
+                  months:
+                    item["Months"]
+
+                      .split(",")
+
+                      .map(
+                        function(month) {
+
+                          return month.trim();
+
+                        }
+                      ),
+
+                  date:
+                    item["Date"],
+
+                  time:
+                    item["Time"],
+
+                  registration:
+                    item["Registration"],
+
+                  description:
+                    item["Description"]
+
+                };
+              }
+            );
+
+        loadingMessage.style.display =
+          "none";
+
+        errorMessage.style.display =
+          "none";
+
+        displayActivities(
+          activities
+        );
+
       } catch (error) {
-        loadingMessage.style.display = "none";
-        activityGrid.innerHTML = "";
-        resultCount.textContent = "";
 
-        errorMessage.style.display = "block";
+        loadingMessage.style.display =
+          "none";
 
-        console.error(error);
+        activityGrid.innerHTML =
+          "";
+
+        resultCount.textContent =
+          "";
+
+        errorMessage.style.display =
+          "block";
+
+        console.error(
+          error
+        );
       }
     }
 
-    function displayActivities(activityList) {
-      activityGrid.innerHTML = "";
+    function displayActivities(
+      activityList
+    ) {
 
-      if (activityList.length === 1) {
-        resultCount.textContent = "1 activity found";
-      } else {
-        resultCount.textContent =
-          activityList.length + " activities found";
+      activityGrid.innerHTML =
+        "";
+
+      activityGrid.classList.remove(
+        "results-1",
+        "results-2",
+        "results-3"
+      );
+
+      if (
+        activityList.length >= 1 &&
+        activityList.length <= 3
+      ) {
+
+        activityGrid.classList.add(
+          "results-" +
+          activityList.length
+        );
+
       }
 
-      if (activityList.length === 0) {
-        emptyMessage.style.display = "block";
+      if (
+        activityList.length === 1
+      ) {
+
+        resultCount.textContent =
+          "1 activity found";
+
+      } else {
+
+        resultCount.textContent =
+          activityList.length +
+          " activities found";
+
+      }
+
+      if (
+        activityList.length === 0
+      ) {
+
+        emptyMessage.style.display =
+          "block";
+
         return;
       }
 
-      emptyMessage.style.display = "none";
+      emptyMessage.style.display =
+        "none";
 
-      activityList.forEach(function(activity) {
-        const card =
-          document.createElement("article");
+      activityList.forEach(
+        function(activity) {
 
-        card.className =
-          "activity-card " +
-          getCategoryCardClass(activity.category);
+          const card =
+            document.createElement(
+              "article"
+            );
 
-        const link = safeURL(activity.link);
+          card.className =
+            "activity-card " +
+            getCategoryCardClass(
+              activity.category
+            );
 
-        card.innerHTML = `
-          <div class="card-top">
+          const link =
+            safeURL(
+              activity.link
+            );
 
-            <span class="
-              category-tag
-              ${getCategoryClass(activity.category)}
-            ">
-              ${escapeHTML(activity.category)}
-            </span>
+          card.innerHTML = `
 
-            <span class="
-              location-tag
-              ${getLocationClass(activity.locationType)}
-            ">
-              ${escapeHTML(activity.locationType)}
-            </span>
+            <div class="card-top">
 
-          </div>
-
-          <h2>${escapeHTML(activity.name)}</h2>
-
-          <div class="card-details">
-
-            <div class="detail-row">
-              <span class="detail-icon">📅</span>
-
-              <span>
-                <strong>Date:</strong>
-                ${escapeHTML(activity.date)}
+              <span class="
+                category-tag
+                ${getCategoryClass(
+                  activity.category
+                )}
+              ">
+                ${escapeHTML(
+                  activity.category
+                )}
               </span>
+
+              <span class="
+                location-tag
+                ${getLocationClass(
+                  activity.locationType
+                )}
+              ">
+                ${escapeHTML(
+                  activity.locationType
+                )}
+              </span>
+
             </div>
 
-            <div class="detail-row">
-              <span class="detail-icon">🕒</span>
+            <h2>
+              ${escapeHTML(
+                activity.name
+              )}
+            </h2>
 
-              <span>
-                <strong>Time:</strong>
-                ${escapeHTML(activity.time)}
-              </span>
-            </div>
+            <div class="card-details">
 
-            ${activity.location ? `
               <div class="detail-row">
-                <span class="detail-icon">📍</span>
+
+                <span class="detail-icon">
+                  📅
+                </span>
 
                 <span>
-                  <strong>Location:</strong>
-                  ${escapeHTML(activity.location)}
+
+                  <strong>
+                    Date:
+                  </strong>
+
+                  ${escapeHTML(
+                    activity.date
+                  )}
+
                 </span>
+
               </div>
-            ` : ""}
 
-            <div class="detail-row">
-              <span class="detail-icon">🔁</span>
+              <div class="detail-row">
 
-              <span>
-                <strong>Frequency:</strong>
-                ${escapeHTML(activity.frequency)}
-              </span>
+                <span class="detail-icon">
+                  🕒
+                </span>
+
+                <span>
+
+                  <strong>
+                    Time:
+                  </strong>
+
+                  ${escapeHTML(
+                    activity.time
+                  )}
+
+                </span>
+
+              </div>
+
+              ${
+                activity.location
+
+                ? `
+
+                  <div class="detail-row">
+
+                    <span class="detail-icon">
+                      📍
+                    </span>
+
+                    <span>
+
+                      <strong>
+                        Location:
+                      </strong>
+
+                      ${escapeHTML(
+                        activity.location
+                      )}
+
+                    </span>
+
+                  </div>
+
+                `
+
+                : ""
+              }
+
+              <div class="detail-row">
+
+                <span class="detail-icon">
+                  🔁
+                </span>
+
+                <span>
+
+                  <strong>
+                    Frequency:
+                  </strong>
+
+                  ${escapeHTML(
+                    activity.frequency
+                  )}
+
+                </span>
+
+              </div>
+
+              <div class="detail-row">
+
+                <span class="detail-icon">
+                  📝
+                </span>
+
+                <span>
+
+                  <strong>
+                    Registration:
+                  </strong>
+
+                  ${escapeHTML(
+                    activity.registration
+                  )}
+
+                </span>
+
+              </div>
+
             </div>
 
-            <div class="detail-row">
-              <span class="detail-icon">📝</span>
+            <p class="description">
 
-              <span>
-                <strong>Registration:</strong>
-                ${escapeHTML(activity.registration)}
-              </span>
-            </div>
+              ${escapeHTML(
+                activity.description
+              )}
 
-          </div>
+            </p>
 
-          <p class="description">
-            ${escapeHTML(activity.description)}
-          </p>
+            <a
+              class="activity-link"
+              href="${link}"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View activity
+            </a>
 
-          <a
-            class="activity-link"
-            href="${link}"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            View activity
-          </a>
-        `;
+          `;
 
-        activityGrid.appendChild(card);
-      });
+          activityGrid.appendChild(
+            card
+          );
+
+        }
+      );
     }
 
     function filterActivities() {
+
       const searchText =
-        searchInput.value.trim().toLowerCase();
+        searchInput.value
+          .trim()
+          .toLowerCase();
 
       const selectedCategory =
         categoryFilter.value;
@@ -1182,54 +2003,72 @@
         registrationFilter.value;
 
       const filteredActivities =
-        activities.filter(function(activity) {
-          const searchableText = `
-            ${activity.name}
-            ${activity.category}
-            ${activity.date}
-            ${activity.time}
-            ${activity.locationType}
-            ${activity.location}
-            ${activity.frequency}
-            ${activity.registration}
-            ${activity.description}
-          `.toLowerCase();
+        activities.filter(
+          function(activity) {
 
-          const matchesSearch =
-            searchableText.includes(searchText);
+            const searchableText = `
+              ${activity.name}
+              ${activity.category}
+              ${activity.date}
+              ${activity.time}
+              ${activity.locationType}
+              ${activity.location}
+              ${activity.frequency}
+              ${activity.registration}
+              ${activity.description}
+            `.toLowerCase();
 
-          const matchesCategory =
-            selectedCategory === "All" ||
-            activity.category === selectedCategory;
+            const matchesSearch =
+              searchableText.includes(
+                searchText
+              );
 
-          const matchesLocation =
-            selectedLocation === "All" ||
-            activity.locationType === selectedLocation;
+            const matchesCategory =
+              selectedCategory ===
+                "All" ||
+              activity.category ===
+                selectedCategory;
 
-          const matchesMonth =
-            selectedMonth === "All" ||
-            activity.months.includes(selectedMonth);
+            const matchesLocation =
+              selectedLocation ===
+                "All" ||
+              activity.locationType ===
+                selectedLocation;
 
-          const matchesFrequency =
-            selectedFrequency === "All" ||
-            activity.frequency === selectedFrequency;
+            const matchesMonth =
+              selectedMonth ===
+                "All" ||
+              activity.months.includes(
+                selectedMonth
+              );
 
-          const matchesRegistration =
-            selectedRegistration === "All" ||
-            activity.registration ===
-              selectedRegistration;
+            const matchesFrequency =
+              selectedFrequency ===
+                "All" ||
+              activity.frequency ===
+                selectedFrequency;
 
-          return (
-            matchesSearch &&
-            matchesCategory &&
-            matchesLocation &&
-            matchesMonth &&
-            matchesFrequency &&
-            matchesRegistration
-          );
-        });
+            const matchesRegistration =
+              selectedRegistration ===
+                "All" ||
+              activity.registration ===
+                selectedRegistration;
 
-      displayActivities(filteredActivities);
+            return (
+              matchesSearch &&
+              matchesCategory &&
+              matchesLocation &&
+              matchesMonth &&
+              matchesFrequency &&
+              matchesRegistration
+            );
+
+          }
+        );
+
+      displayActivities(
+        filteredActivities
+      );
     }
 
     searchInput.addEventListener(
@@ -1265,38 +2104,60 @@
     filterToggle.addEventListener(
       "click",
       function() {
+
         const isCollapsed =
-          filtersPanel.classList.toggle("collapsed");
+          filtersPanel
+            .classList
+            .toggle(
+              "collapsed"
+            );
 
         filterToggle.setAttribute(
           "aria-expanded",
-          String(!isCollapsed)
+          String(
+            !isCollapsed
+          )
         );
 
         filterToggle.textContent =
           isCollapsed
             ? "Show filters"
             : "Hide filters";
+
       }
     );
 
     clearFilters.addEventListener(
       "click",
       function() {
-        searchInput.value = "";
-        categoryFilter.value = "All";
-        locationFilter.value = "All";
-        monthFilter.value = "All";
-        frequencyFilter.value = "All";
-        registrationFilter.value = "All";
+
+        searchInput.value =
+          "";
+
+        categoryFilter.value =
+          "All";
+
+        locationFilter.value =
+          "All";
+
+        monthFilter.value =
+          "All";
+
+        frequencyFilter.value =
+          "All";
+
+        registrationFilter.value =
+          "All";
 
         filterActivities();
+
       }
     );
 
     cardViewButton.addEventListener(
       "click",
       function() {
+
         activityGrid.classList.remove(
           "list-view"
         );
@@ -1308,12 +2169,14 @@
         listViewButton.classList.remove(
           "active"
         );
+
       }
     );
 
     listViewButton.addEventListener(
       "click",
       function() {
+
         activityGrid.classList.add(
           "list-view"
         );
@@ -1325,10 +2188,12 @@
         cardViewButton.classList.remove(
           "active"
         );
+
       }
     );
 
     loadActivities();
+
   </script>
 
 </body>

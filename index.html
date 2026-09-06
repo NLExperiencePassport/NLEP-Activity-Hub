@@ -375,55 +375,27 @@
        CARD GRID
        ========================= */
 
-    .activity-grid {
-      display: grid;
+.activity-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+}
 
-      grid-template-columns:
-        repeat(
-          4,
-          minmax(0, 1fr)
-        );
+.activity-card {
+  flex: 0 1 calc((100% - 48px) / 4);
+}
 
-      gap: 16px;
-    }
+/* List mode */
+.activity-grid.list-view {
+  flex-direction: column;
+  align-items: center;
+}
 
-    /* 1 result */
-    .activity-grid.results-1 {
-      grid-template-columns:
-        minmax(0, 320px);
-
-      justify-content: center;
-    }
-
-    /* 2 results */
-    .activity-grid.results-2 {
-      grid-template-columns:
-        repeat(
-          2,
-          minmax(0, 320px)
-        );
-
-      justify-content: center;
-    }
-
-    /* 3 results */
-    .activity-grid.results-3 {
-      grid-template-columns:
-        repeat(
-          3,
-          minmax(0, 320px)
-        );
-
-      justify-content: center;
-    }
-
-    /* List mode */
-    .activity-grid.list-view {
-      grid-template-columns:
-        minmax(0, 900px);
-
-      justify-content: center;
-    }
+.activity-grid.list-view .activity-card {
+  width: min(900px, 100%);
+  flex: 0 0 auto;
+}
 
     /* =========================
        CARDS

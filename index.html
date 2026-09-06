@@ -1565,13 +1565,38 @@
         console.error(error);
       }
     }
+function getActivitySortDate(dateText) {
+  const text = cleanText(dateText);
 
+  const match = text.match(
+    /(January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2},\s+\d{4}/i
+  );
+
+  if (!match) {
+    return Number.POSITIVE_INFINITY;
+  }
+
+  const parsedDate = Date.parse(match[0]);
+
+  return Number.isNaN(parsedDate)
+    ? Number.POSITIVE_INFINITY
+    : parsedDate;
+}
     function displayActivities(
-      activityList
-    ) {
+  activityList
+) {
 
-      activityGrid.innerHTML =
-        "";
+  activityList = [...activityList].sort(
+    function(a, b) {
+      return (
+        getActivitySortDate(a.date) -
+        getActivitySortDate(b.date)
+      );
+    }
+  );
+
+  activityGrid.innerHTML =
+    "";
 
       activityGrid.classList.remove(
         "results-1",

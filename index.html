@@ -310,6 +310,17 @@
       color: var(--soft-text);
     }
 
+    .verification-link {
+  margin: 0;
+  color: var(--soft-text);
+  font-size: 14px;
+  text-align: center;
+}
+
+.verification-link a {
+  color: var(--brand);
+  font-weight: 700;
+}
     .view-buttons {
       display: flex;
       gap: 7px;
@@ -988,27 +999,26 @@
 
     </div>
 
-    <div class="results-bar">
+  <div class="results-bar">
 
-  <div>
-    <p
-      class="result-count"
-      id="resultCount"
+  <p
+    class="result-count"
+    id="resultCount"
+  >
+    Loading activities...
+  </p>
+
+  <p class="verification-link">
+    Download a
+    <a
+      href="https://munl-my.sharepoint.com/:w:/r/personal/hjun_mun_ca/Documents/NLSIP%203%20Files/03_NLEP%20Participant%20Mgmt/NLEP_Activity_Participation_Form.docx?d=wccdb079d9d4349659754aeee4aeed059&amp;csf=1&amp;web=1&amp;e=6UZPzh"
+      target="_blank"
+      rel="noopener noreferrer"
     >
-      Loading activities...
-    </p>
-
-    <p class="verification-link">
-      Verification Form:
-      <a
-        href="https://munl-my.sharepoint.com/:w:/r/personal/hjun_mun_ca/Documents/NLSIP%203%20Files/03_NLEP%20Participant%20Mgmt/NLEP_Activity_Participation_Form.docx?d=wccdb079d9d4349659754aeee4aeed059&amp;csf=1&amp;web=1&amp;e=6UZPzh"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Download here
-      </a>
-    </p>
-  </div>
+      Verification Form
+    </a>
+    if needed
+  </p>
 
   <div class="view-buttons">
 
@@ -1031,7 +1041,6 @@
   </div>
 
 </div>
-
 </main>
   <section
     class="activities-section"

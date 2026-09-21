@@ -387,18 +387,36 @@
        ========================= */
 
 .activity-grid {
+  display: block;
+}
+
+.activity-group-grid {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 16px;
 }
 
-.activity-card {
+.activity-group-grid .activity-card {
   flex: 0 1 calc((100% - 48px) / 4);
 }
 
+.activity-section-block + .activity-section-block {
+  margin-top: 48px;
+  padding-top: 38px;
+  border-top: 1px solid rgba(61, 75, 87, 0.2);
+}
+
+.activity-section-heading {
+  margin: 0 0 20px;
+  color: var(--navy);
+  font-size: clamp(24px, 3vw, 32px);
+  line-height: 1.2;
+  text-align: left;
+}
+
 /* List mode */
-.activity-grid.list-view {
+.activity-grid.list-view .activity-group-grid {
   flex-direction: column;
   align-items: center;
 }
@@ -696,6 +714,10 @@
 
     @media (max-width: 1180px) {
 
+      .activity-group-grid .activity-card {
+        flex-basis: calc((100% - 32px) / 3);
+      }
+
       .activity-grid {
         grid-template-columns:
           repeat(
@@ -733,6 +755,10 @@
 
     @media (max-width: 820px) {
 
+      .activity-group-grid .activity-card {
+        flex-basis: calc((100% - 16px) / 2);
+      }
+
       .activity-grid {
         grid-template-columns:
           repeat(
@@ -761,6 +787,10 @@
     }
 
     @media (max-width: 650px) {
+
+      .activity-group-grid .activity-card {
+        flex-basis: 100%;
+      }
 
       header {
         min-height: 410px;
@@ -1518,6 +1548,13 @@
                   date:
                     item["Date"],
 
+                  nextDate:
+                    item["Next Date"],
+
+                  lastDate:
+                    item["Last Date"] ||
+                    item["End Date"],
+
                   time:
                     item["Time"],
 
@@ -1558,35 +1595,494 @@
         console.error(error);
       }
     }
-function getActivitySortDate(dateText) {
-  const text = cleanText(dateText);
+    const programEndDate =
+      new Date(2026, 11, 6).getTime();
 
-  const match = text.match(
-    /(January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2},\s+\d{4}/i
-  );
+    const monthNumbers = {
+      january: 0,
+      february: 1,
+      march: 2,
+      april: 3,
+      may: 4,
+      june: 5,
+      july: 6,
+      august: 7,
+      september: 8,
+      october: 9,
+      november: 10,
+      december: 11
+    };
 
-  if (!match) {
-    return Number.POSITIVE_INFINITY;
-  }
+    function getTodayStart() {
 
-  const parsedDate = Date.parse(match[0]);
+      const now = new Date();
 
-  return Number.isNaN(parsedDate)
-    ? Number.POSITIVE_INFINITY
-    : parsedDate;
-}
+      return new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        now.getDate()
+      ).getTime();
+    }
+
+    function getCalendarDates(value) {
+
+      let text = cleanText(value);
+
+      if (!text) {
+        return [];
+      }
+
+      const abbreviations = {
+        Jan: "January",
+        Feb: "February",
+        Mar: "March",
+        Apr: "April",
+        Jun: "June",
+        Jul: "July",
+        Aug: "August",
+        Sep: "September",
+        Sept: "September",
+        Oct: "October",
+        Nov: "November",
+        Dec: "December"
+      };
+
+      Object.keys(abbreviations).forEach(
+        function(shortMonth) {
+
+          text = text.replace(
+            new RegExp(
+              "\\b" +
+              shortMonth +
+              "\\.?(?![A-Za-z])",
+              "gi"
+            ),
+            abbreviations[shortMonth]
+          );
+        }
+      );
+
+      const yearMatches =
+        text.match(/\b20\d{2}\b/g);
+
+      const fallbackYear =
+        yearMatches
+          ? Number(
+              yearMatches[
+                yearMatches.length - 1
+              ]
+            )
+          : new Date().getFullYear();
+
+      const dates = [];
+
+      const monthPattern =
+        /(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{1,2})(?:\s*,?\s*(20\d{2}))?/gi;
+
+      let match;
+
+      while (
+        (
+          match =
+            monthPattern.exec(text)
+        ) !== null
+      ) {
+
+        const year =
+          Number(match[3]) ||
+          fallbackYear;
+
+        const month =
+          monthNumbers[
+            match[1].toLowerCase()
+          ];
+
+        const day =
+          Number(match[2]);
+
+        const timestamp =
+          new Date(
+            year,
+            month,
+            day
+          ).getTime();
+
+        if (!Number.isNaN(timestamp)) {
+          dates.push(timestamp);
+        }
+      }
+
+      const numericPattern =
+        /\b(\d{1,2})\/(\d{1,2})\/(20\d{2})\b/g;
+
+      while (
+        (
+          match =
+            numericPattern.exec(text)
+        ) !== null
+      ) {
+
+        dates.push(
+          new Date(
+            Number(match[3]),
+            Number(match[1]) - 1,
+            Number(match[2])
+          ).getTime()
+        );
+      }
+
+      const isoPattern =
+        /\b(20\d{2})-(\d{1,2})-(\d{1,2})\b/g;
+
+      while (
+        (
+          match =
+            isoPattern.exec(text)
+        ) !== null
+      ) {
+
+        dates.push(
+          new Date(
+            Number(match[1]),
+            Number(match[2]) - 1,
+            Number(match[3])
+          ).getTime()
+        );
+      }
+
+      return Array.from(
+        new Set(dates)
+      ).sort(
+        function(a, b) {
+          return a - b;
+        }
+      );
+    }
+
+    function getActivityEndDate(activity) {
+
+      const enteredLastDates =
+        getCalendarDates(
+          activity.lastDate
+        );
+
+      if (enteredLastDates.length) {
+        return enteredLastDates[
+          enteredLastDates.length - 1
+        ];
+      }
+
+      const dates =
+        getCalendarDates(
+          activity.date
+        );
+
+      const isRecurring =
+        cleanText(
+          activity.frequency
+        ).toLowerCase() ===
+          "recurring";
+
+      if (isRecurring) {
+
+        if (
+          dates.length > 1 &&
+          !/starting/i.test(
+            activity.date
+          )
+        ) {
+          return dates[
+            dates.length - 1
+          ];
+        }
+
+        return programEndDate;
+      }
+
+      return dates.length
+        ? dates[dates.length - 1]
+        : Number.POSITIVE_INFINITY;
+    }
+
+    function getActivityUpcomingDate(
+      activity,
+      today
+    ) {
+
+      const enteredNextDates =
+        getCalendarDates(
+          activity.nextDate
+        );
+
+      const enteredNextDate =
+        enteredNextDates.find(
+          function(date) {
+            return date >= today;
+          }
+        );
+
+      if (enteredNextDate !== undefined) {
+        return enteredNextDate;
+      }
+
+      const dates =
+        getCalendarDates(
+          activity.date
+        );
+
+      const endDate =
+        getActivityEndDate(activity);
+
+      const weeklyMatch =
+        cleanText(activity.date).match(
+          /every\s+(other\s+)?(monday|tuesday|wednesday|thursday|friday|saturday|sunday)/i
+        );
+
+      if (
+        weeklyMatch &&
+        dates.length
+      ) {
+
+        const interval =
+          weeklyMatch[1]
+            ? 14 * 24 * 60 * 60 * 1000
+            : 7 * 24 * 60 * 60 * 1000;
+
+        let nextDate = dates[0];
+
+        let safetyCounter = 0;
+
+        while (
+          nextDate < today &&
+          safetyCounter < 100
+        ) {
+
+          const nextDateObject =
+            new Date(nextDate);
+
+          nextDateObject.setDate(
+            nextDateObject.getDate() +
+            interval /
+              (24 * 60 * 60 * 1000)
+          );
+
+          nextDate =
+            nextDateObject.getTime();
+
+          safetyCounter++;
+        }
+
+        if (nextDate <= endDate) {
+          return nextDate;
+        }
+      }
+
+      const monthlyMatch =
+        cleanText(activity.date).match(
+          /(first|second|third|fourth|last)\s+(monday|tuesday|wednesday|thursday|friday|saturday|sunday)\s+of\s+each\s+month/i
+        );
+
+      if (monthlyMatch) {
+
+        const ordinalNumbers = {
+          first: 1,
+          second: 2,
+          third: 3,
+          fourth: 4
+        };
+
+        const weekdayNumbers = {
+          sunday: 0,
+          monday: 1,
+          tuesday: 2,
+          wednesday: 3,
+          thursday: 4,
+          friday: 5,
+          saturday: 6
+        };
+
+        const ordinal =
+          monthlyMatch[1]
+            .toLowerCase();
+
+        const weekday =
+          weekdayNumbers[
+            monthlyMatch[2]
+              .toLowerCase()
+          ];
+
+        const cursor =
+          new Date(today);
+
+        cursor.setDate(1);
+
+        for (
+          let monthOffset = 0;
+          monthOffset < 18;
+          monthOffset++
+        ) {
+
+          const year =
+            cursor.getFullYear();
+
+          const month =
+            cursor.getMonth();
+
+          let candidate;
+
+          if (ordinal === "last") {
+
+            candidate =
+              new Date(
+                year,
+                month + 1,
+                0
+              );
+
+            candidate.setDate(
+              candidate.getDate() -
+              (
+                candidate.getDay() -
+                weekday +
+                7
+              ) % 7
+            );
+
+          } else {
+
+            candidate =
+              new Date(
+                year,
+                month,
+                1
+              );
+
+            candidate.setDate(
+              1 +
+              (
+                weekday -
+                candidate.getDay() +
+                7
+              ) % 7 +
+              (
+                ordinalNumbers[
+                  ordinal
+                ] - 1
+              ) * 7
+            );
+          }
+
+          const candidateTime =
+            candidate.getTime();
+
+          if (
+            candidateTime >= today &&
+            candidateTime <= endDate
+          ) {
+            return candidateTime;
+          }
+
+          cursor.setMonth(
+            cursor.getMonth() + 1
+          );
+        }
+      }
+
+      const nextExplicitDate =
+        dates.find(
+          function(date) {
+            return date >= today;
+          }
+        );
+
+      if (nextExplicitDate !== undefined) {
+        return nextExplicitDate;
+      }
+
+      return endDate >= today
+        ? endDate
+        : Number.POSITIVE_INFINITY;
+    }
+
     function displayActivities(
   activityList
 ) {
 
-  activityList = [...activityList].sort(
-    function(a, b) {
-      return (
-        getActivitySortDate(a.date) -
-        getActivitySortDate(b.date)
+  const activityCount =
+    activityList.length;
+
+  const today =
+    getTodayStart();
+
+  const upcomingActivities =
+    activityList
+      .filter(
+        function(activity) {
+          return (
+            getActivityEndDate(activity) >=
+            today
+          );
+        }
+      )
+      .sort(
+        function(a, b) {
+          return (
+            getActivityUpcomingDate(
+              a,
+              today
+            ) -
+            getActivityUpcomingDate(
+              b,
+              today
+            )
+          );
+        }
       );
-    }
-  );
+
+  const pastActivities =
+    activityList
+      .filter(
+        function(activity) {
+          return (
+            getActivityEndDate(activity) <
+            today
+          );
+        }
+      )
+      .sort(
+        function(a, b) {
+          return (
+            getActivityEndDate(b) -
+            getActivityEndDate(a)
+          );
+        }
+      );
+
+  activityList = [];
+
+  if (upcomingActivities.length) {
+
+    activityList.push({
+      isSectionHeading: true,
+      title: "Upcoming Activities"
+    });
+
+    activityList.push(
+      ...upcomingActivities
+    );
+  }
+
+  if (pastActivities.length) {
+
+    activityList.push({
+      isSectionHeading: true,
+      title: "Past Activities"
+    });
+
+    activityList.push(
+      ...pastActivities
+    );
+  }
 
   activityGrid.innerHTML =
     "";
@@ -1598,19 +2094,19 @@ function getActivitySortDate(dateText) {
       );
 
       if (
-        activityList.length >= 1 &&
-        activityList.length <= 3
+        activityCount >= 1 &&
+        activityCount <= 3
       ) {
 
         activityGrid.classList.add(
           "results-" +
-          activityList.length
+          activityCount
         );
 
       }
 
       if (
-        activityList.length === 1
+        activityCount === 1
       ) {
 
         resultCount.textContent =
@@ -1619,13 +2115,13 @@ function getActivitySortDate(dateText) {
       } else {
 
         resultCount.textContent =
-          activityList.length +
+          activityCount +
           " activities found";
 
       }
 
       if (
-        activityList.length === 0
+        activityCount === 0
       ) {
 
         emptyMessage.style.display =
@@ -1637,8 +2133,54 @@ function getActivitySortDate(dateText) {
       emptyMessage.style.display =
         "none";
 
+      let currentGroupGrid = null;
+
       activityList.forEach(
         function(activity) {
+
+          if (activity.isSectionHeading) {
+
+            const section =
+              document.createElement(
+                "section"
+              );
+
+            section.className =
+              "activity-section-block";
+
+            const heading =
+              document.createElement(
+                "h2"
+              );
+
+            heading.className =
+              "activity-section-heading";
+
+            heading.textContent =
+              activity.title;
+
+            currentGroupGrid =
+              document.createElement(
+                "div"
+              );
+
+            currentGroupGrid.className =
+              "activity-group-grid";
+
+            section.appendChild(
+              heading
+            );
+
+            section.appendChild(
+              currentGroupGrid
+            );
+
+            activityGrid.appendChild(
+              section
+            );
+
+            return;
+          }
 
           const card =
             document.createElement(
@@ -1796,7 +2338,7 @@ function getActivitySortDate(dateText) {
 
           `;
 
-          activityGrid.appendChild(
+          currentGroupGrid.appendChild(
             card
           );
 

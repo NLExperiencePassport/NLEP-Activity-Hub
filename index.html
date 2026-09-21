@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
   <title>NLEP Activity List</title>
 
   <style>
@@ -15,6 +20,8 @@
       --text: #252525;
       --soft-text: #666666;
       --border: #dce2e6;
+      --upcoming: #356ca3;
+      --past: #596773;
     }
 
     * {
@@ -23,94 +30,172 @@
 
     body {
       margin: 0;
-      font-family: "Avenir Next", Avenir, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+
+      font-family:
+        "Avenir Next",
+        Avenir,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
       background:
-        radial-gradient(circle at top left, rgba(76, 92, 105, 0.08), transparent 34%),
-        linear-gradient(180deg, #f1f4f6 0, var(--background) 460px);
+        radial-gradient(
+          circle at top left,
+          rgba(76, 92, 105, 0.08),
+          transparent 34%
+        ),
+        linear-gradient(
+          180deg,
+          #f1f4f6 0,
+          var(--background) 460px
+        );
+
       background-attachment: fixed;
+
       color: var(--text);
     }
+
+
+    /* =========================================
+       HEADER
+       ========================================= */
 
     header {
       min-height: 440px;
       padding: 58px 20px;
+
       display: flex;
       align-items: center;
       justify-content: center;
+
       background:
-        linear-gradient(rgba(10, 25, 36, 0.25), rgba(12, 30, 42, 0.58)),
+        linear-gradient(
+          rgba(10, 25, 36, 0.25),
+          rgba(12, 30, 42, 0.58)
+        ),
         url("https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Signal_Hill_St_John_Harbour_Newfoundland_%2840469269265%29.jpg/1280px-Signal_Hill_St_John_Harbour_Newfoundland_%2840469269265%29.jpg");
+
       background-size: cover;
       background-position: center 53%;
+
       color: var(--white);
       text-align: center;
-      border-bottom: 6px solid rgba(255, 255, 255, 0.82);
-      box-shadow: 0 8px 28px rgba(38, 52, 61, 0.18);
+
+      border-bottom:
+        6px solid rgba(255, 255, 255, 0.82);
+
+      box-shadow:
+        0 8px 28px rgba(38, 52, 61, 0.18);
     }
 
     .hero-content {
       width: min(770px, 100%);
       padding: 34px 40px 37px;
-      background-color: rgba(18, 34, 45, 0.70);
-      border: 1px solid rgba(255, 255, 255, 0.34);
+
+      background-color:
+        rgba(18, 34, 45, 0.70);
+
+      border:
+        1px solid rgba(255, 255, 255, 0.34);
+
       border-radius: 22px;
-      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.28);
+
+      box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.28);
+
       backdrop-filter: blur(4px);
       -webkit-backdrop-filter: blur(4px);
     }
 
     .header-label {
       display: inline-block;
+
       margin-bottom: 18px;
       padding: 8px 15px;
-      background-color: rgba(255, 255, 255, 0.94);
+
+      background-color:
+        rgba(255, 255, 255, 0.94);
+
       color: #26343d;
+
       border-radius: 999px;
-      font-size: clamp(14px, 1.8vw, 17px);
+
+      font-size:
+        clamp(14px, 1.8vw, 17px);
+
       font-weight: 700;
       letter-spacing: 1.7px;
     }
 
     header h1 {
       margin: 0 0 16px;
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(43px, 6vw, 64px);
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size:
+        clamp(43px, 6vw, 64px);
+
       font-weight: 700;
       line-height: 1.08;
       letter-spacing: -0.5px;
-      text-shadow: 0 3px 18px rgba(0, 0, 0, 0.30);
+
+      text-shadow:
+        0 3px 18px rgba(0, 0, 0, 0.30);
     }
 
     header p {
       max-width: 680px;
       margin: 0 auto;
+
       font-size: 18px;
       line-height: 1.55;
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+
+      text-shadow:
+        0 2px 10px rgba(0, 0, 0, 0.35);
     }
 
     .header-motto {
       display: block;
+
       margin-bottom: 7px;
+
       font-size: 20px;
       font-weight: 650;
     }
 
     .header-description {
-      color: rgba(255, 255, 255, 0.92);
+      color:
+        rgba(255, 255, 255, 0.92);
     }
+
+
+    /* =========================================
+       SEARCH + FILTERS
+       ========================================= */
 
     main {
       max-width: 1150px;
+
       margin: auto;
+
       padding: 38px 20px 26px;
     }
 
     .search-controls {
       display: grid;
-      grid-template-columns: 1fr auto;
+
+      grid-template-columns:
+        1fr auto;
+
       gap: 10px;
+
       align-items: stretch;
+
       margin-bottom: 14px;
     }
 
@@ -123,39 +208,63 @@
     input,
     select {
       width: 100%;
+
       padding: 14px;
+
       font-size: 15px;
-      background-color: var(--white);
-      border: 1px solid var(--border);
+
+      background-color:
+        var(--white);
+
+      border:
+        1px solid var(--border);
+
       border-radius: 10px;
     }
 
     input:focus,
     select:focus {
-      border-color: var(--brand);
-      outline: 3px solid rgba(61, 75, 87, 0.14);
+      border-color:
+        var(--brand);
+
+      outline:
+        3px solid rgba(61, 75, 87, 0.14);
     }
 
     .filter-toggle {
       min-width: 130px;
+
       padding: 13px 16px;
-      background-color: var(--brand);
-      color: var(--white);
-      border: 1px solid var(--brand);
+
+      background-color:
+        var(--brand);
+
+      color:
+        var(--white);
+
+      border:
+        1px solid var(--brand);
+
       border-radius: 10px;
+
       font-size: 15px;
       font-weight: 700;
+
       cursor: pointer;
     }
 
     .filter-toggle:hover {
-      background-color: var(--brand-dark);
+      background-color:
+        var(--brand-dark);
     }
 
     .filters-panel {
       overflow: hidden;
+
       max-height: 600px;
+
       opacity: 1;
+
       transition:
         max-height 0.28s ease,
         opacity 0.22s ease,
@@ -164,345 +273,613 @@
 
     .filters-panel.collapsed {
       max-height: 0;
+
       opacity: 0;
+
       margin: 0;
+
       pointer-events: none;
     }
 
     .filters {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
+
+      grid-template-columns:
+        repeat(
+          auto-fit,
+          minmax(165px, 1fr)
+        );
+
       gap: 12px;
+
       margin-bottom: 24px;
     }
 
     .clear-button {
       padding: 13px;
-      background-color: var(--white);
-      color: var(--brand);
-      border: 1px solid var(--brand);
+
+      background-color:
+        var(--white);
+
+      color:
+        var(--brand);
+
+      border:
+        1px solid var(--brand);
+
       border-radius: 10px;
+
       font-size: 15px;
       font-weight: bold;
+
       cursor: pointer;
     }
 
     .clear-button:hover {
-      background-color: var(--brand-soft);
+      background-color:
+        var(--brand-soft);
     }
 
     .results-bar {
       display: flex;
+
       align-items: center;
       justify-content: space-between;
+
       gap: 15px;
+
+      margin-bottom: 0;
     }
 
     .result-count {
       margin: 0;
-      color: var(--soft-text);
+
+      color:
+        var(--soft-text);
     }
 
     .verification-link {
       margin: 0;
-      color: var(--soft-text);
+
+      color:
+        var(--soft-text);
+
       font-size: 14px;
+
       text-align: center;
     }
 
     .verification-link a {
-      color: var(--brand);
+      color:
+        var(--brand);
+
       font-weight: 700;
     }
 
     .view-buttons {
       display: flex;
+
       gap: 7px;
     }
 
     .view-button {
       padding: 8px 12px;
-      background-color: var(--white);
+
+      background-color:
+        var(--white);
+
       color: #555555;
-      border: 1px solid var(--border);
+
+      border:
+        1px solid var(--border);
+
       border-radius: 8px;
+
       cursor: pointer;
     }
 
     .view-button.active {
-      background-color: var(--brand);
-      color: var(--white);
-      border-color: var(--brand);
+      background-color:
+        var(--brand);
+
+      color:
+        var(--white);
+
+      border-color:
+        var(--brand);
     }
+
+
+    /* =========================================
+       ACTIVITY BACKGROUND
+       ========================================= */
 
     .activities-section {
       position: relative;
+
       overflow: hidden;
+
       background:
         linear-gradient(
           rgba(233, 239, 243, 0.55),
           rgba(226, 234, 239, 0.62)
         ),
         url("images/20260904_165815.jpg");
+
       background-size: cover;
-      background-position: center center;
-      background-repeat: no-repeat;
-      border-top: 1px solid rgba(61, 75, 87, 0.10);
-      border-bottom: 1px solid rgba(61, 75, 87, 0.12);
+
+      background-position:
+        center center;
+
+      background-repeat:
+        no-repeat;
+
+      border-top:
+        1px solid rgba(61, 75, 87, 0.10);
+
+      border-bottom:
+        1px solid rgba(61, 75, 87, 0.12);
     }
 
     .activities-inner {
       max-width: 1380px;
+
       margin: 0 auto;
-      padding: 38px 20px 54px;
+
+      padding:
+        38px 20px 54px;
     }
+
+
+    /* =========================================
+       ACTIVITY SECTIONS
+       ========================================= */
 
     .activity-grid {
       display: block;
-    }
-
-    .activity-group-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 16px;
-    }
-
-    .activity-group-grid .activity-card {
-      flex: 0 1 calc((100% - 48px) / 4);
     }
 
     .activity-section-block {
       margin: 0;
     }
 
-    .activity-section-block + .activity-section-block {
-      margin-top: 64px;
-      padding-top: 42px;
-      border-top: 2px solid rgba(38, 52, 61, 0.22);
+    .activity-section-block +
+    .activity-section-block {
+      margin-top: 54px;
+
+      padding-top: 8px;
+    }
+
+    .activity-section-title-row {
+      display: flex;
+
+      align-items: center;
+
+      gap: 14px;
+
+      margin:
+        0 auto 25px;
+
+      max-width: 1260px;
     }
 
     .activity-section-heading {
-      width: fit-content;
-      margin: 0 auto 26px;
-      padding: 10px 20px;
-      background: rgba(255, 255, 255, 0.94);
-      color: #26343d;
-      border: 1px solid rgba(38, 52, 61, 0.14);
-      border-radius: 999px;
-      box-shadow: 0 6px 18px rgba(38, 52, 61, 0.10);
-      font-size: 22px;
-      font-weight: 800;
+      margin: 0;
+
+      color:
+        var(--upcoming);
+
+      font-size:
+        clamp(24px, 3vw, 31px);
+
+      font-weight: 700;
+
       line-height: 1.2;
-      text-align: center;
-      letter-spacing: 0.1px;
+
+      white-space: nowrap;
     }
 
-    .activity-section-block:first-child .activity-section-heading::before {
-      content: "✦ ";
-      color: #356ca3;
+    .activity-section-count {
+      display: inline-flex;
+
+      align-items: center;
+      justify-content: center;
+
+      min-width: 42px;
+
+      height: 42px;
+
+      padding: 0 13px;
+
+      background-color:
+        var(--upcoming);
+
+      color:
+        var(--white);
+
+      border-radius: 999px;
+
+      font-size: 18px;
+
+      font-weight: 700;
+
+      flex-shrink: 0;
     }
 
-    .activity-section-block:last-child .activity-section-heading {
-      background: rgba(238, 241, 243, 0.96);
-      color: #5b6670;
+    .activity-section-line {
+      flex: 1;
+
+      height: 2px;
+
+      background-color:
+        rgba(61, 75, 87, 0.25);
     }
 
-    .activity-section-block:last-child .activity-card {
-      opacity: 0.84;
-      filter: saturate(0.82);
+
+    /* Past heading only */
+
+    .past-section
+    .activity-section-heading {
+      color:
+        var(--past);
     }
 
-    .activity-section-block:last-child .activity-card:hover {
-      opacity: 1;
-      filter: none;
+    .past-section
+    .activity-section-count {
+      background-color:
+        var(--past);
     }
 
-    .activity-grid.list-view .activity-group-grid {
+
+    /* =========================================
+       CARD GRID
+       ========================================= */
+
+    .activity-group-grid {
+      display: flex;
+
+      flex-wrap: wrap;
+
+      justify-content: center;
+
+      gap: 16px;
+    }
+
+    .activity-group-grid
+    .activity-card {
+      flex:
+        0 1
+        calc((100% - 48px) / 4);
+    }
+
+
+    /* List mode */
+
+    .activity-grid.list-view
+    .activity-group-grid {
       flex-direction: column;
+
       align-items: center;
     }
 
-    .activity-grid.list-view .activity-card {
-      width: min(900px, 100%);
-      flex: 0 0 auto;
+    .activity-grid.list-view
+    .activity-card {
+      width:
+        min(900px, 100%);
+
+      flex:
+        0 0 auto;
     }
+
+
+    /* =========================================
+       CARDS
+       ========================================= */
 
     .activity-card {
       display: flex;
+
       flex-direction: column;
+
       padding: 16px;
-      background-color: var(--white);
-      border: 1px solid #e8e8e8;
-      border-top: 4px solid transparent;
+
+      background-color:
+        var(--white);
+
+      border:
+        1px solid #e8e8e8;
+
+      border-top:
+        4px solid transparent;
+
       border-radius: 14px;
-      box-shadow: 0 8px 24px rgba(38, 52, 61, 0.08);
+
+      box-shadow:
+        0 8px 24px rgba(38, 52, 61, 0.08);
+
       transition:
         transform 0.2s ease,
         box-shadow 0.2s ease;
     }
 
     .activity-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 13px 30px rgba(38, 52, 61, 0.13);
+      transform:
+        translateY(-3px);
+
+      box-shadow:
+        0 13px 30px rgba(38, 52, 61, 0.13);
     }
+
+
+    /* Community & Culture */
 
     .card-community {
-      background-color: #fff3f8;
-      border-color: #f2d3e0;
-      border-top-color: #c4326a;
+      background-color:
+        #fff3f8;
+
+      border-color:
+        #f2d3e0;
+
+      border-top-color:
+        #c4326a;
     }
+
+
+    /* Career & Integration */
 
     .card-career {
-      background-color: #fff9e8;
-      border-color: #efdfab;
-      border-top-color: #bd790d;
+      background-color:
+        #fff9e8;
+
+      border-color:
+        #efdfab;
+
+      border-top-color:
+        #bd790d;
     }
+
+
+    /* Social & Wellbeing */
 
     .card-social {
-      background-color: #f0faf4;
-      border-color: #cce7d7;
-      border-top-color: #2f8157;
+      background-color:
+        #f0faf4;
+
+      border-color:
+        #cce7d7;
+
+      border-top-color:
+        #2f8157;
     }
 
+
+    /* Civic Engagement */
+
     .card-civic {
-      background-color: #f2f7fd;
-      border-color: #d1e0f2;
-      border-top-color: #3d73aa;
+      background-color:
+        #f2f7fd;
+
+      border-color:
+        #d1e0f2;
+
+      border-top-color:
+        #3d73aa;
     }
 
     .card-top {
       display: flex;
+
       align-items: flex-start;
+
       justify-content: space-between;
+
       gap: 8px;
+
       margin-bottom: 11px;
+
       flex-wrap: wrap;
     }
 
     .activity-card h2 {
       margin: 0;
+
       font-size: 18px;
+
       line-height: 1.22;
+
       color: #252525;
     }
 
     .category-tag,
     .location-tag {
       display: inline-block;
+
       width: fit-content;
+
       padding: 6px 9px;
+
       border-radius: 18px;
+
       font-size: 11px;
+
       font-weight: bold;
     }
 
+
+    /* Category tags */
+
     .category-community {
-      background-color: #f7dbe8;
-      color: #9d174d;
+      background-color:
+        #f7dbe8;
+
+      color:
+        #9d174d;
     }
 
     .category-career {
-      background-color: #fbe9ad;
-      color: #92400e;
+      background-color:
+        #fbe9ad;
+
+      color:
+        #92400e;
     }
 
     .category-social {
-      background-color: #d2eddc;
-      color: #166534;
+      background-color:
+        #d2eddc;
+
+      color:
+        #166534;
     }
 
     .category-civic {
-      background-color: #d8e7f7;
-      color: #1e40af;
+      background-color:
+        #d8e7f7;
+
+      color:
+        #1e40af;
     }
 
     .location-on-campus,
     .location-off-campus,
     .location-online {
-      background-color: #e8edf1;
-      color: #3d4952;
+      background-color:
+        #e8edf1;
+
+      color:
+        #3d4952;
     }
 
     .card-details {
       margin: 10px 0;
+
       font-size: 14px;
     }
 
     .detail-row {
       display: flex;
+
       align-items: flex-start;
+
       gap: 8px;
+
       margin: 7px 0;
+
       line-height: 1.35;
     }
 
     .detail-icon {
       width: 20px;
+
       flex-shrink: 0;
+
       text-align: center;
     }
 
     .description {
       flex-grow: 1;
+
       margin: 3px 0 0;
+
       color: #555555;
+
       font-size: 14px;
+
       line-height: 1.42;
     }
 
     .activity-link {
       display: block;
+
       margin-top: 14px;
+
       padding: 10px 12px;
-      background-color: var(--brand);
-      color: var(--white);
+
+      background-color:
+        var(--brand);
+
+      color:
+        var(--white);
+
       border-radius: 9px;
+
       text-align: center;
+
       text-decoration: none;
+
       font-weight: bold;
     }
 
-    .card-community .activity-link {
-      background-color: #b4265c;
+
+    /* Category buttons */
+
+    .card-community
+    .activity-link {
+      background-color:
+        #b4265c;
     }
 
-    .card-community .activity-link:hover {
-      background-color: #8f1947;
+    .card-community
+    .activity-link:hover {
+      background-color:
+        #8f1947;
     }
 
-    .card-career .activity-link {
-      background-color: #a9670b;
+    .card-career
+    .activity-link {
+      background-color:
+        #a9670b;
     }
 
-    .card-career .activity-link:hover {
-      background-color: #855006;
+    .card-career
+    .activity-link:hover {
+      background-color:
+        #855006;
     }
 
-    .card-social .activity-link {
-      background-color: #27754e;
+    .card-social
+    .activity-link {
+      background-color:
+        #27754e;
     }
 
-    .card-social .activity-link:hover {
-      background-color: #1d5b3b;
+    .card-social
+    .activity-link:hover {
+      background-color:
+        #1d5b3b;
     }
 
-    .card-civic .activity-link {
-      background-color: #356ca3;
+    .card-civic
+    .activity-link {
+      background-color:
+        #356ca3;
     }
 
-    .card-civic .activity-link:hover {
-      background-color: #27547f;
+    .card-civic
+    .activity-link:hover {
+      background-color:
+        #27547f;
     }
+
+
+    /* =========================================
+       STATUS MESSAGES
+       ========================================= */
 
     .loading,
     .empty-message,
     .error-message {
       padding: 40px 20px;
-      background-color: var(--white);
+
+      background-color:
+        var(--white);
+
       border-radius: 14px;
+
       text-align: center;
-      color: var(--soft-text);
+
+      color:
+        var(--soft-text);
     }
 
     .empty-message,
@@ -511,61 +888,110 @@
     }
 
     .error-message {
-      color: #991b1b;
-      background-color: #fee2e2;
+      color:
+        #991b1b;
+
+      background-color:
+        #fee2e2;
     }
 
+
+    /* =========================================
+       FOOTER
+       ========================================= */
+
     .site-footer {
-      padding: 24px 20px 22px;
-      background-color: #26343d;
-      color: rgba(255, 255, 255, 0.88);
+      padding:
+        24px 20px 22px;
+
+      background-color:
+        #26343d;
+
+      color:
+        rgba(255, 255, 255, 0.88);
+
       text-align: center;
     }
 
     .site-footer p {
       margin: 0;
+
       line-height: 1.65;
     }
 
     .site-footer a {
-      color: #ffffff;
+      color:
+        #ffffff;
+
       font-weight: 700;
-      text-underline-offset: 3px;
+
+      text-decoration-thickness:
+        1px;
+
+      text-underline-offset:
+        3px;
     }
 
     .photo-credit {
       display: block;
+
       margin-top: 11px;
-      color: rgba(255, 255, 255, 0.56);
+
+      color:
+        rgba(255, 255, 255, 0.56);
+
       font-size: 10px;
     }
 
     .photo-credit a {
       color: inherit;
+
       font-weight: 400;
     }
 
+
+    /* =========================================
+       RESPONSIVE
+       ========================================= */
+
     @media (max-width: 1180px) {
-      .activity-group-grid .activity-card {
-        flex-basis: calc((100% - 32px) / 3);
+
+      .activity-group-grid
+      .activity-card {
+        flex-basis:
+          calc((100% - 32px) / 3);
       }
+
     }
+
 
     @media (max-width: 820px) {
-      .activity-group-grid .activity-card {
-        flex-basis: calc((100% - 16px) / 2);
+
+      .activity-group-grid
+      .activity-card {
+        flex-basis:
+          calc((100% - 16px) / 2);
       }
+
     }
 
+
     @media (max-width: 650px) {
+
       header {
         min-height: 410px;
-        padding: 35px 16px;
-        background-position: center;
+
+        padding:
+          35px 16px;
+
+        background-position:
+          center;
       }
 
       .hero-content {
-        padding: 28px 20px 31px;
+        padding:
+          28px 20px 31px;
+
         border-radius: 17px;
       }
 
@@ -582,11 +1008,13 @@
       }
 
       main {
-        padding: 24px 15px;
+        padding:
+          24px 15px;
       }
 
       .search-controls {
-        grid-template-columns: 1fr;
+        grid-template-columns:
+          1fr;
       }
 
       .filter-toggle {
@@ -595,35 +1023,68 @@
 
       .results-bar {
         align-items: flex-start;
+
         flex-direction: column;
       }
 
       .activities-inner {
-        padding: 34px 15px 46px;
+        padding:
+          34px 15px 46px;
       }
 
-      .activity-group-grid .activity-card {
-        flex-basis: 100%;
+      .activity-group-grid
+      .activity-card {
+        flex-basis:
+          100%;
       }
 
-      .activity-section-block + .activity-section-block {
-        margin-top: 48px;
-        padding-top: 32px;
+      .activity-section-block +
+      .activity-section-block {
+        margin-top: 40px;
+
+        padding-top: 0;
+      }
+
+      .activity-section-title-row {
+        gap: 10px;
+
+        margin-bottom: 20px;
       }
 
       .activity-section-heading {
-        margin-bottom: 20px;
-        padding: 9px 17px;
-        font-size: 19px;
+        font-size: 21px;
       }
+
+      .activity-section-count {
+        min-width: 36px;
+
+        height: 36px;
+
+        padding: 0 11px;
+
+        font-size: 16px;
+      }
+
+      .activity-section-line {
+        min-width: 25px;
+      }
+
     }
   </style>
 </head>
 
+
 <body>
 
+
+  <!-- =====================================
+       HEADER
+       ===================================== -->
+
   <header>
+
     <div class="hero-content">
+
       <span class="header-label">
         YOUR NEXT DESTINATION
       </span>
@@ -633,26 +1094,41 @@
       </h1>
 
       <p>
+
         <span class="header-motto">
           Explore. Connect. Engage. Grow.
         </span>
 
         <span class="header-description">
-          Discover activities, build connections, and make the most of your experience in Newfoundland and Labrador.
+          Discover activities, build connections, and make
+          the most of your experience in Newfoundland and Labrador.
         </span>
+
       </p>
+
     </div>
+
   </header>
+
+
+  <!-- =====================================
+       SEARCH + FILTERS
+       ===================================== -->
 
   <main>
 
     <div class="search-controls">
 
-      <input
-        id="searchInput"
-        type="search"
-        placeholder="🔎 Search by activity, location, or keyword..."
-      >
+      <div class="search-box">
+
+        <input
+          id="searchInput"
+          type="search"
+          placeholder="🔎 Search by activity, location, or keyword..."
+        >
+
+      </div>
+
 
       <button
         class="filter-toggle"
@@ -666,12 +1142,16 @@
 
     </div>
 
+
     <div
       class="filters-panel collapsed"
       id="filtersPanel"
     >
 
       <div class="filters">
+
+
+        <!-- CATEGORY -->
 
         <select id="categoryFilter">
 
@@ -697,6 +1177,9 @@
 
         </select>
 
+
+        <!-- LOCATION -->
+
         <select id="locationFilter">
 
           <option value="All">
@@ -712,6 +1195,9 @@
           </option>
 
         </select>
+
+
+        <!-- MONTH -->
 
         <select id="monthFilter">
 
@@ -737,6 +1223,9 @@
 
         </select>
 
+
+        <!-- FREQUENCY -->
+
         <select id="frequencyFilter">
 
           <option value="All">
@@ -752,6 +1241,9 @@
           </option>
 
         </select>
+
+
+        <!-- REGISTRATION -->
 
         <select id="registrationFilter">
 
@@ -769,6 +1261,7 @@
 
         </select>
 
+
         <button
           class="clear-button"
           id="clearFilters"
@@ -781,6 +1274,7 @@
 
     </div>
 
+
     <div class="results-bar">
 
       <p
@@ -790,8 +1284,11 @@
         Loading activities...
       </p>
 
+
       <p class="verification-link">
+
         Download a
+
         <a
           href="https://munl-my.sharepoint.com/:w:/r/personal/hjun_mun_ca/Documents/NLSIP%203%20Files/03_NLEP%20Participant%20Mgmt/NLEP_Activity_Participation_Form.docx?d=wccdb079d9d4349659754aeee4aeed059&amp;csf=1&amp;web=1&amp;e=6UZPzh"
           target="_blank"
@@ -799,8 +1296,11 @@
         >
           Participation Form
         </a>
+
         if needed
+
       </p>
+
 
       <div class="view-buttons">
 
@@ -826,12 +1326,18 @@
 
   </main>
 
+
+  <!-- =====================================
+       ACTIVITIES
+       ===================================== -->
+
   <section
     class="activities-section"
     aria-label="Activities"
   >
 
     <div class="activities-inner">
+
 
       <div
         class="loading"
@@ -840,10 +1346,12 @@
         Loading activities from Google Sheets...
       </div>
 
+
       <div
         class="activity-grid"
         id="activityGrid"
       ></div>
+
 
       <div
         class="empty-message"
@@ -852,16 +1360,24 @@
         No activities match your search and filters.
       </div>
 
+
       <div
         class="error-message"
         id="errorMessage"
       >
-        The activities could not be loaded. Please check the Google Sheet.
+        The activities could not be loaded.
+        Please check the Google Sheet.
       </div>
+
 
     </div>
 
   </section>
+
+
+  <!-- =====================================
+       FOOTER
+       ===================================== -->
 
   <footer class="site-footer">
 
@@ -885,6 +1401,7 @@
         crandriamaha@mun.ca
       </a>.
 
+
       <small class="photo-credit">
 
         Header photo:
@@ -905,66 +1422,113 @@
 
   </footer>
 
+
+  <!-- =====================================
+       JAVASCRIPT
+       ===================================== -->
+
   <script>
 
     const sheetURL =
       "https://docs.google.com/spreadsheets/d/e/2PACX-1vQARdvW0HUWWlESQ601ZcBKG3Ti0IR-P6C5hlPpFi7j2Eo5co-U1v3xHOKlA4AY6uhgmoebFB5VhoUJ/pub?gid=0&single=true&output=csv";
 
+
     let activities = [];
 
+
     const searchInput =
-      document.getElementById("searchInput");
+      document.getElementById(
+        "searchInput"
+      );
 
     const categoryFilter =
-      document.getElementById("categoryFilter");
+      document.getElementById(
+        "categoryFilter"
+      );
 
     const locationFilter =
-      document.getElementById("locationFilter");
+      document.getElementById(
+        "locationFilter"
+      );
 
     const monthFilter =
-      document.getElementById("monthFilter");
+      document.getElementById(
+        "monthFilter"
+      );
 
     const frequencyFilter =
-      document.getElementById("frequencyFilter");
+      document.getElementById(
+        "frequencyFilter"
+      );
 
     const registrationFilter =
-      document.getElementById("registrationFilter");
+      document.getElementById(
+        "registrationFilter"
+      );
 
     const clearFilters =
-      document.getElementById("clearFilters");
+      document.getElementById(
+        "clearFilters"
+      );
 
     const filterToggle =
-      document.getElementById("filterToggle");
+      document.getElementById(
+        "filterToggle"
+      );
 
     const filtersPanel =
-      document.getElementById("filtersPanel");
+      document.getElementById(
+        "filtersPanel"
+      );
 
     const activityGrid =
-      document.getElementById("activityGrid");
+      document.getElementById(
+        "activityGrid"
+      );
 
     const resultCount =
-      document.getElementById("resultCount");
+      document.getElementById(
+        "resultCount"
+      );
 
     const loadingMessage =
-      document.getElementById("loadingMessage");
+      document.getElementById(
+        "loadingMessage"
+      );
 
     const emptyMessage =
-      document.getElementById("emptyMessage");
+      document.getElementById(
+        "emptyMessage"
+      );
 
     const errorMessage =
-      document.getElementById("errorMessage");
+      document.getElementById(
+        "errorMessage"
+      );
 
     const cardViewButton =
-      document.getElementById("cardViewButton");
+      document.getElementById(
+        "cardViewButton"
+      );
 
     const listViewButton =
-      document.getElementById("listViewButton");
+      document.getElementById(
+        "listViewButton"
+      );
+
+
+    /* =====================================
+       BASIC HELPERS
+       ===================================== */
 
     function cleanText(value) {
+
       return String(
         value || ""
       ).trim();
+
     }
+
 
     function parseCSV(text) {
 
@@ -973,6 +1537,7 @@
       let row = [];
       let cell = "";
       let insideQuotes = false;
+
 
       for (
         let index = 0;
@@ -986,6 +1551,7 @@
         const nextCharacter =
           text[index + 1];
 
+
         if (
           character === '"' &&
           insideQuotes &&
@@ -993,24 +1559,32 @@
         ) {
 
           cell += '"';
+
           index++;
 
-        } else if (
+        }
+
+        else if (
           character === '"'
         ) {
 
           insideQuotes =
             !insideQuotes;
 
-        } else if (
+        }
+
+        else if (
           character === "," &&
           !insideQuotes
         ) {
 
           row.push(cell);
+
           cell = "";
 
-        } else if (
+        }
+
+        else if (
           (
             character === "\n" ||
             character === "\r"
@@ -1022,16 +1596,22 @@
             character === "\r" &&
             nextCharacter === "\n"
           ) {
+
             index++;
+
           }
 
           row.push(cell);
+
           rows.push(row);
 
           row = [];
+
           cell = "";
 
-        } else {
+        }
+
+        else {
 
           cell += character;
 
@@ -1039,19 +1619,23 @@
 
       }
 
+
       if (
         cell.length > 0 ||
         row.length > 0
       ) {
 
         row.push(cell);
+
         rows.push(row);
 
       }
 
+
       return rows;
 
     }
+
 
     function safeURL(value) {
 
@@ -1059,6 +1643,7 @@
 
         const url =
           new URL(value);
+
 
         if (
           url.protocol === "http:" ||
@@ -1069,15 +1654,19 @@
 
         }
 
-      } catch (error) {
+      }
+
+      catch (error) {
 
         return "#";
 
       }
 
+
       return "#";
 
     }
+
 
     function escapeHTML(value) {
 
@@ -1110,32 +1699,47 @@
 
     }
 
+
+    /* =====================================
+       CATEGORY CLASSES
+       ===================================== */
+
     function getCategoryClass(category) {
 
       if (
         category ===
         "Community & Culture"
       ) {
+
         return "category-community";
+
       }
+
 
       if (
         category ===
         "Career & Integration"
       ) {
+
         return "category-career";
+
       }
+
 
       if (
         category ===
         "Social & Wellbeing"
       ) {
+
         return "category-social";
+
       }
+
 
       return "category-civic";
 
     }
+
 
     function getCategoryCardClass(category) {
 
@@ -1143,26 +1747,36 @@
         category ===
         "Community & Culture"
       ) {
+
         return "card-community";
+
       }
+
 
       if (
         category ===
         "Career & Integration"
       ) {
+
         return "card-career";
+
       }
+
 
       if (
         category ===
         "Social & Wellbeing"
       ) {
+
         return "card-social";
+
       }
+
 
       return "card-civic";
 
     }
+
 
     function getLocationClass(locationType) {
 
@@ -1170,19 +1784,30 @@
         locationType ===
         "On campus"
       ) {
+
         return "location-on-campus";
+
       }
+
 
       if (
         locationType ===
         "Off campus"
       ) {
+
         return "location-off-campus";
+
       }
+
 
       return "location-online";
 
     }
+
+
+    /* =====================================
+       LOAD GOOGLE SHEET
+       ===================================== */
 
     async function loadActivities() {
 
@@ -1196,6 +1821,7 @@
             }
           );
 
+
         if (!response.ok) {
 
           throw new Error(
@@ -1204,11 +1830,16 @@
 
         }
 
+
         const csvText =
           await response.text();
 
+
         const rows =
-          parseCSV(csvText);
+          parseCSV(
+            csvText
+          );
+
 
         const headers =
           rows
@@ -1225,6 +1856,7 @@
 
               }
             );
+
 
         activities =
           rows
@@ -1250,6 +1882,7 @@
 
                 const item = {};
 
+
                 headers.forEach(
                   function(
                     header,
@@ -1263,6 +1896,7 @@
 
                   }
                 );
+
 
                 return {
 
@@ -1286,7 +1920,9 @@
 
                   months:
                     item["Months"]
+
                       .split(",")
+
                       .map(
                         function(month) {
 
@@ -1319,35 +1955,51 @@
               }
             );
 
+
         loadingMessage.style.display =
           "none";
 
+
         errorMessage.style.display =
           "none";
+
 
         displayActivities(
           activities
         );
 
-      } catch (error) {
+      }
+
+      catch (error) {
 
         loadingMessage.style.display =
           "none";
 
+
         activityGrid.innerHTML =
           "";
+
 
         resultCount.textContent =
           "";
 
+
         errorMessage.style.display =
           "block";
 
-        console.error(error);
+
+        console.error(
+          error
+        );
 
       }
 
     }
+
+
+    /* =====================================
+       DATE HANDLING
+       ===================================== */
 
     const programEndDate =
       new Date(
@@ -1356,27 +2008,41 @@
         6
       ).getTime();
 
+
     const monthNumbers = {
 
       january: 0,
+
       february: 1,
+
       march: 2,
+
       april: 3,
+
       may: 4,
+
       june: 5,
+
       july: 6,
+
       august: 7,
+
       september: 8,
+
       october: 9,
+
       november: 10,
+
       december: 11
 
     };
+
 
     function getTodayStart() {
 
       const now =
         new Date();
+
 
       return new Date(
         now.getFullYear(),
@@ -1386,31 +2052,48 @@
 
     }
 
+
     function getCalendarDates(value) {
 
       let text =
         cleanText(value);
 
+
       if (!text) {
+
         return [];
+
       }
+
 
       const abbreviations = {
 
         Jan: "January",
+
         Feb: "February",
+
         Mar: "March",
+
         Apr: "April",
+
         Jun: "June",
+
         Jul: "July",
+
         Aug: "August",
+
         Sep: "September",
+
         Sept: "September",
+
         Oct: "October",
+
         Nov: "November",
+
         Dec: "December"
 
       };
+
 
       Object.keys(
         abbreviations
@@ -1433,27 +2116,35 @@
         }
       );
 
+
       const yearMatches =
         text.match(
           /\b20\d{2}\b/g
         );
 
+
       const fallbackYear =
         yearMatches
+
           ? Number(
               yearMatches[
                 yearMatches.length - 1
               ]
             )
+
           : new Date()
               .getFullYear();
 
+
       const dates = [];
+
 
       const monthPattern =
         /(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{1,2})(?:\s*,?\s*(20\d{2}))?/gi;
 
+
       let match;
+
 
       while (
         (
@@ -1470,16 +2161,19 @@
           ) ||
           fallbackYear;
 
+
         const month =
           monthNumbers[
             match[1]
               .toLowerCase()
           ];
 
+
         const day =
           Number(
             match[2]
           );
+
 
         const timestamp =
           new Date(
@@ -1487,6 +2181,7 @@
             month,
             day
           ).getTime();
+
 
         if (
           !Number.isNaN(
@@ -1502,8 +2197,10 @@
 
       }
 
+
       const numericPattern =
         /\b(\d{1,2})\/(\d{1,2})\/(20\d{2})\b/g;
+
 
       while (
         (
@@ -1526,8 +2223,10 @@
 
       }
 
+
       const isoPattern =
         /\b(20\d{2})-(\d{1,2})-(\d{1,2})\b/g;
+
 
       while (
         (
@@ -1550,6 +2249,7 @@
 
       }
 
+
       return Array.from(
         new Set(
           dates
@@ -1564,12 +2264,14 @@
 
     }
 
+
     function getActivityEndDate(activity) {
 
       const enteredLastDates =
         getCalendarDates(
           activity.lastDate
         );
+
 
       if (
         enteredLastDates.length
@@ -1581,16 +2283,19 @@
 
       }
 
+
       const dates =
         getCalendarDates(
           activity.date
         );
+
 
       const isRecurring =
         cleanText(
           activity.frequency
         ).toLowerCase() ===
         "recurring";
+
 
       if (
         isRecurring
@@ -1609,17 +2314,22 @@
 
         }
 
+
         return programEndDate;
 
       }
 
+
       return dates.length
+
         ? dates[
             dates.length - 1
           ]
+
         : Number.POSITIVE_INFINITY;
 
     }
+
 
     function getActivityUpcomingDate(
       activity,
@@ -1631,6 +2341,7 @@
           activity.nextDate
         );
 
+
       const enteredNextDate =
         enteredNextDates.find(
           function(date) {
@@ -1641,6 +2352,7 @@
           }
         );
 
+
       if (
         enteredNextDate !==
         undefined
@@ -1650,15 +2362,18 @@
 
       }
 
+
       const dates =
         getCalendarDates(
           activity.date
         );
 
+
       const endDate =
         getActivityEndDate(
           activity
         );
+
 
       const weeklyMatch =
         cleanText(
@@ -1667,6 +2382,7 @@
           /every\s+(other\s+)?(monday|tuesday|wednesday|thursday|friday|saturday|sunday)/i
         );
 
+
       if (
         weeklyMatch &&
         dates.length
@@ -1674,14 +2390,19 @@
 
         const intervalDays =
           weeklyMatch[1]
+
             ? 14
+
             : 7;
+
 
         let nextDate =
           dates[0];
 
+
         let safetyCounter =
           0;
+
 
         while (
           nextDate < today &&
@@ -1693,19 +2414,21 @@
               nextDate
             );
 
+
           nextDateObject.setDate(
-            nextDateObject
-              .getDate() +
-              intervalDays
+            nextDateObject.getDate() +
+            intervalDays
           );
 
+
           nextDate =
-            nextDateObject
-              .getTime();
+            nextDateObject.getTime();
+
 
           safetyCounter++;
 
         }
+
 
         if (
           nextDate <= endDate
@@ -1717,12 +2440,14 @@
 
       }
 
+
       const monthlyMatch =
         cleanText(
           activity.date
         ).match(
           /(first|second|third|fourth|last)\s+(monday|tuesday|wednesday|thursday|friday|saturday|sunday)\s+of\s+each\s+month/i
         );
+
 
       if (
         monthlyMatch
@@ -1731,27 +2456,39 @@
         const ordinalNumbers = {
 
           first: 1,
+
           second: 2,
+
           third: 3,
+
           fourth: 4
 
         };
 
+
         const weekdayNumbers = {
 
           sunday: 0,
+
           monday: 1,
+
           tuesday: 2,
+
           wednesday: 3,
+
           thursday: 4,
+
           friday: 5,
+
           saturday: 6
 
         };
 
+
         const ordinal =
           monthlyMatch[1]
             .toLowerCase();
+
 
         const weekday =
           weekdayNumbers[
@@ -1759,14 +2496,17 @@
               .toLowerCase()
           ];
 
+
         const cursor =
           new Date(
             today
           );
 
+
         cursor.setDate(
           1
         );
+
 
         for (
           let monthOffset = 0;
@@ -1778,11 +2518,14 @@
             cursor
               .getFullYear();
 
+
           const month =
             cursor
               .getMonth();
 
+
           let candidate;
+
 
           if (
             ordinal ===
@@ -1796,6 +2539,7 @@
                 0
               );
 
+
             candidate.setDate(
               candidate.getDate() -
               (
@@ -1805,7 +2549,9 @@
               ) % 7
             );
 
-          } else {
+          }
+
+          else {
 
             candidate =
               new Date(
@@ -1813,6 +2559,7 @@
                 month,
                 1
               );
+
 
             candidate.setDate(
               1 +
@@ -1830,29 +2577,29 @@
 
           }
 
+
           const candidateTime =
-            candidate
-              .getTime();
+            candidate.getTime();
+
 
           if (
-            candidateTime >=
-              today &&
-            candidateTime <=
-              endDate
+            candidateTime >= today &&
+            candidateTime <= endDate
           ) {
 
             return candidateTime;
 
           }
 
+
           cursor.setMonth(
-            cursor.getMonth() +
-            1
+            cursor.getMonth() + 1
           );
 
         }
 
       }
+
 
       const nextExplicitDate =
         dates.find(
@@ -1864,6 +2611,7 @@
           }
         );
 
+
       if (
         nextExplicitDate !==
         undefined
@@ -1873,11 +2621,407 @@
 
       }
 
+
       return endDate >= today
+
         ? endDate
+
         : Number.POSITIVE_INFINITY;
 
     }
+
+
+    /* =====================================
+       SECTION TITLE
+       singular / plural
+       ===================================== */
+
+    function getSectionTitle(
+      type,
+      count
+    ) {
+
+      if (
+        type === "upcoming"
+      ) {
+
+        return count === 1
+
+          ? "Upcoming Activity"
+
+          : "Upcoming Activities";
+
+      }
+
+
+      return count === 1
+
+        ? "Past Activity"
+
+        : "Past Activities";
+
+    }
+
+
+    /* =====================================
+       CREATE ACTIVITY CARD
+       ===================================== */
+
+    function createActivityCard(
+      activity
+    ) {
+
+      const card =
+        document.createElement(
+          "article"
+        );
+
+
+      card.className =
+        "activity-card " +
+        getCategoryCardClass(
+          activity.category
+        );
+
+
+      const link =
+        safeURL(
+          activity.link
+        );
+
+
+      card.innerHTML = `
+
+        <div class="card-top">
+
+          <span class="
+            category-tag
+            ${getCategoryClass(
+              activity.category
+            )}
+          ">
+            ${escapeHTML(
+              activity.category
+            )}
+          </span>
+
+
+          <span class="
+            location-tag
+            ${getLocationClass(
+              activity.locationType
+            )}
+          ">
+            ${escapeHTML(
+              activity.locationType
+            )}
+          </span>
+
+        </div>
+
+
+        <h2>
+          ${escapeHTML(
+            activity.name
+          )}
+        </h2>
+
+
+        <div class="card-details">
+
+
+          <div class="detail-row">
+
+            <span class="detail-icon">
+              📅
+            </span>
+
+            <span>
+
+              <strong>
+                Date:
+              </strong>
+
+              ${escapeHTML(
+                activity.date
+              )}
+
+            </span>
+
+          </div>
+
+
+          <div class="detail-row">
+
+            <span class="detail-icon">
+              🕒
+            </span>
+
+            <span>
+
+              <strong>
+                Time:
+              </strong>
+
+              ${escapeHTML(
+                activity.time
+              )}
+
+            </span>
+
+          </div>
+
+
+          ${
+            activity.location
+
+              ? `
+
+                <div class="detail-row">
+
+                  <span class="detail-icon">
+                    📍
+                  </span>
+
+                  <span>
+
+                    <strong>
+                      Location:
+                    </strong>
+
+                    ${escapeHTML(
+                      activity.location
+                    )}
+
+                  </span>
+
+                </div>
+
+              `
+
+              : ""
+          }
+
+
+          <div class="detail-row">
+
+            <span class="detail-icon">
+              🔁
+            </span>
+
+            <span>
+
+              <strong>
+                Frequency:
+              </strong>
+
+              ${escapeHTML(
+                activity.frequency
+              )}
+
+            </span>
+
+          </div>
+
+
+          <div class="detail-row">
+
+            <span class="detail-icon">
+              📝
+            </span>
+
+            <span>
+
+              <strong>
+                Registration:
+              </strong>
+
+              ${escapeHTML(
+                activity.registration
+              )}
+
+            </span>
+
+          </div>
+
+
+        </div>
+
+
+        <p class="description">
+
+          ${escapeHTML(
+            activity.description
+          )}
+
+        </p>
+
+
+        <a
+          class="activity-link"
+          href="${link}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          View activity
+        </a>
+
+      `;
+
+
+      return card;
+
+    }
+
+
+    /* =====================================
+       CREATE UPCOMING / PAST SECTION
+       ===================================== */
+
+    function addSection(
+      type,
+      sectionActivities
+    ) {
+
+      if (
+        !sectionActivities.length
+      ) {
+
+        return;
+
+      }
+
+
+      const section =
+        document.createElement(
+          "section"
+        );
+
+
+      section.className =
+        "activity-section-block";
+
+
+      if (
+        type === "past"
+      ) {
+
+        section.classList.add(
+          "past-section"
+        );
+
+      }
+
+
+      const titleRow =
+        document.createElement(
+          "div"
+        );
+
+
+      titleRow.className =
+        "activity-section-title-row";
+
+
+      const heading =
+        document.createElement(
+          "h2"
+        );
+
+
+      heading.className =
+        "activity-section-heading";
+
+
+      heading.textContent =
+        getSectionTitle(
+          type,
+          sectionActivities.length
+        );
+
+
+      const count =
+        document.createElement(
+          "span"
+        );
+
+
+      count.className =
+        "activity-section-count";
+
+
+      count.textContent =
+        sectionActivities.length;
+
+
+      const line =
+        document.createElement(
+          "span"
+        );
+
+
+      line.className =
+        "activity-section-line";
+
+
+      titleRow.appendChild(
+        heading
+      );
+
+
+      titleRow.appendChild(
+        count
+      );
+
+
+      titleRow.appendChild(
+        line
+      );
+
+
+      const groupGrid =
+        document.createElement(
+          "div"
+        );
+
+
+      groupGrid.className =
+        "activity-group-grid";
+
+
+      sectionActivities.forEach(
+        function(activity) {
+
+          groupGrid.appendChild(
+            createActivityCard(
+              activity
+            )
+          );
+
+        }
+      );
+
+
+      section.appendChild(
+        titleRow
+      );
+
+
+      section.appendChild(
+        groupGrid
+      );
+
+
+      activityGrid.appendChild(
+        section
+      );
+
+    }
+
+
+    /* =====================================
+       DISPLAY ACTIVITIES
+       ===================================== */
 
     function displayActivities(
       activityList
@@ -1886,23 +3030,26 @@
       const activityCount =
         activityList.length;
 
+
       const today =
         getTodayStart();
 
+
       const upcomingActivities =
         activityList
+
           .filter(
             function(activity) {
 
               return (
                 getActivityEndDate(
                   activity
-                ) >=
-                today
+                ) >= today
               );
 
             }
           )
+
           .sort(
             function(a, b) {
 
@@ -1920,20 +3067,22 @@
             }
           );
 
+
       const pastActivities =
         activityList
+
           .filter(
             function(activity) {
 
               return (
                 getActivityEndDate(
                   activity
-                ) <
-                today
+                ) < today
               );
 
             }
           )
+
           .sort(
             function(a, b) {
 
@@ -1949,14 +3098,28 @@
             }
           );
 
+
       activityGrid.innerHTML =
         "";
 
-      resultCount.textContent =
+
+      if (
         activityCount === 1
-          ? "1 activity found"
-          : activityCount +
-            " activities found";
+      ) {
+
+        resultCount.textContent =
+          "1 activity found";
+
+      }
+
+      else {
+
+        resultCount.textContent =
+          activityCount +
+          " activities found";
+
+      }
+
 
       if (
         activityCount === 0
@@ -1965,246 +3128,33 @@
         emptyMessage.style.display =
           "block";
 
+
         return;
 
       }
 
+
       emptyMessage.style.display =
         "none";
 
-      function addSection(
-        title,
-        sectionActivities
-      ) {
-
-        if (
-          !sectionActivities.length
-        ) {
-
-          return;
-
-        }
-
-        const section =
-          document.createElement(
-            "section"
-          );
-
-        section.className =
-          "activity-section-block";
-
-        const heading =
-          document.createElement(
-            "h2"
-          );
-
-        heading.className =
-          "activity-section-heading";
-
-        heading.textContent =
-          title +
-          " · " +
-          sectionActivities.length;
-
-        const groupGrid =
-          document.createElement(
-            "div"
-          );
-
-        groupGrid.className =
-          "activity-group-grid";
-
-        section.appendChild(
-          heading
-        );
-
-        section.appendChild(
-          groupGrid
-        );
-
-        activityGrid.appendChild(
-          section
-        );
-
-        sectionActivities.forEach(
-          function(activity) {
-
-            const card =
-              document.createElement(
-                "article"
-              );
-
-            card.className =
-              "activity-card " +
-              getCategoryCardClass(
-                activity.category
-              );
-
-            const link =
-              safeURL(
-                activity.link
-              );
-
-            card.innerHTML = `
-
-              <div class="card-top">
-
-                <span class="
-                  category-tag
-                  ${getCategoryClass(
-                    activity.category
-                  )}
-                ">
-                  ${escapeHTML(
-                    activity.category
-                  )}
-                </span>
-
-                <span class="
-                  location-tag
-                  ${getLocationClass(
-                    activity.locationType
-                  )}
-                ">
-                  ${escapeHTML(
-                    activity.locationType
-                  )}
-                </span>
-
-              </div>
-
-              <h2>
-                ${escapeHTML(
-                  activity.name
-                )}
-              </h2>
-
-              <div class="card-details">
-
-                <div class="detail-row">
-
-                  <span class="detail-icon">
-                    📅
-                  </span>
-
-                  <span>
-                    <strong>Date:</strong>
-                    ${escapeHTML(
-                      activity.date
-                    )}
-                  </span>
-
-                </div>
-
-                <div class="detail-row">
-
-                  <span class="detail-icon">
-                    🕒
-                  </span>
-
-                  <span>
-                    <strong>Time:</strong>
-                    ${escapeHTML(
-                      activity.time
-                    )}
-                  </span>
-
-                </div>
-
-                ${
-                  activity.location
-
-                    ? `
-
-                      <div class="detail-row">
-
-                        <span class="detail-icon">
-                          📍
-                        </span>
-
-                        <span>
-                          <strong>Location:</strong>
-                          ${escapeHTML(
-                            activity.location
-                          )}
-                        </span>
-
-                      </div>
-
-                    `
-
-                    : ""
-                }
-
-                <div class="detail-row">
-
-                  <span class="detail-icon">
-                    🔁
-                  </span>
-
-                  <span>
-                    <strong>Frequency:</strong>
-                    ${escapeHTML(
-                      activity.frequency
-                    )}
-                  </span>
-
-                </div>
-
-                <div class="detail-row">
-
-                  <span class="detail-icon">
-                    📝
-                  </span>
-
-                  <span>
-                    <strong>Registration:</strong>
-                    ${escapeHTML(
-                      activity.registration
-                    )}
-                  </span>
-
-                </div>
-
-              </div>
-
-              <p class="description">
-                ${escapeHTML(
-                  activity.description
-                )}
-              </p>
-
-              <a
-                class="activity-link"
-                href="${link}"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                View activity
-              </a>
-
-            `;
-
-            groupGrid.appendChild(
-              card
-            );
-
-          }
-        );
-
-      }
 
       addSection(
-        "Upcoming Activities",
+        "upcoming",
         upcomingActivities
       );
 
+
       addSection(
-        "Past Activities",
+        "past",
         pastActivities
       );
 
     }
+
+
+    /* =====================================
+       FILTER ACTIVITIES
+       ===================================== */
 
     function filterActivities() {
 
@@ -2213,84 +3163,120 @@
           .trim()
           .toLowerCase();
 
+
       const selectedCategory =
         categoryFilter.value;
+
 
       const selectedLocation =
         locationFilter.value;
 
+
       const selectedMonth =
         monthFilter.value;
+
 
       const selectedFrequency =
         frequencyFilter.value;
 
+
       const selectedRegistration =
         registrationFilter.value;
+
 
       const filteredActivities =
         activities.filter(
           function(activity) {
 
             const searchableText = `
+
               ${activity.name}
+
               ${activity.category}
+
               ${activity.date}
+
               ${activity.time}
+
               ${activity.locationType}
+
               ${activity.location}
+
               ${activity.frequency}
+
               ${activity.registration}
+
               ${activity.description}
+
             `.toLowerCase();
+
 
             const matchesSearch =
               searchableText.includes(
                 searchText
               );
 
+
             const matchesCategory =
               selectedCategory ===
                 "All" ||
+
               activity.category ===
                 selectedCategory;
+
 
             const matchesLocation =
               selectedLocation ===
                 "All" ||
+
               activity.locationType ===
                 selectedLocation;
+
 
             const matchesMonth =
               selectedMonth ===
                 "All" ||
+
               activity.months.includes(
                 selectedMonth
               );
 
+
             const matchesFrequency =
               selectedFrequency ===
                 "All" ||
+
               activity.frequency ===
                 selectedFrequency;
+
 
             const matchesRegistration =
               selectedRegistration ===
                 "All" ||
+
               activity.registration ===
                 selectedRegistration;
 
+
             return (
+
               matchesSearch &&
+
               matchesCategory &&
+
               matchesLocation &&
+
               matchesMonth &&
+
               matchesFrequency &&
+
               matchesRegistration
+
             );
 
           }
         );
+
 
       displayActivities(
         filteredActivities
@@ -2298,35 +3284,46 @@
 
     }
 
+
+    /* =====================================
+       EVENT LISTENERS
+       ===================================== */
+
     searchInput.addEventListener(
       "input",
       filterActivities
     );
+
 
     categoryFilter.addEventListener(
       "change",
       filterActivities
     );
 
+
     locationFilter.addEventListener(
       "change",
       filterActivities
     );
+
 
     monthFilter.addEventListener(
       "change",
       filterActivities
     );
 
+
     frequencyFilter.addEventListener(
       "change",
       filterActivities
     );
 
+
     registrationFilter.addEventListener(
       "change",
       filterActivities
     );
+
 
     filterToggle.addEventListener(
       "click",
@@ -2339,6 +3336,7 @@
               "collapsed"
             );
 
+
         filterToggle.setAttribute(
           "aria-expanded",
           String(
@@ -2346,13 +3344,17 @@
           )
         );
 
+
         filterToggle.textContent =
           isCollapsed
+
             ? "Show filters"
+
             : "Hide filters";
 
       }
     );
+
 
     clearFilters.addEventListener(
       "click",
@@ -2361,67 +3363,97 @@
         searchInput.value =
           "";
 
+
         categoryFilter.value =
           "All";
+
 
         locationFilter.value =
           "All";
 
+
         monthFilter.value =
           "All";
+
 
         frequencyFilter.value =
           "All";
 
+
         registrationFilter.value =
           "All";
+
 
         filterActivities();
 
       }
     );
 
+
     cardViewButton.addEventListener(
       "click",
       function() {
 
-        activityGrid.classList.remove(
-          "list-view"
-        );
+        activityGrid
+          .classList
+          .remove(
+            "list-view"
+          );
 
-        cardViewButton.classList.add(
-          "active"
-        );
 
-        listViewButton.classList.remove(
-          "active"
-        );
+        cardViewButton
+          .classList
+          .add(
+            "active"
+          );
+
+
+        listViewButton
+          .classList
+          .remove(
+            "active"
+          );
 
       }
     );
+
 
     listViewButton.addEventListener(
       "click",
       function() {
 
-        activityGrid.classList.add(
-          "list-view"
-        );
+        activityGrid
+          .classList
+          .add(
+            "list-view"
+          );
 
-        listViewButton.classList.add(
-          "active"
-        );
 
-        cardViewButton.classList.remove(
-          "active"
-        );
+        listViewButton
+          .classList
+          .add(
+            "active"
+          );
+
+
+        cardViewButton
+          .classList
+          .remove(
+            "active"
+          );
 
       }
     );
+
+
+    /* =====================================
+       START
+       ===================================== */
 
     loadActivities();
 
   </script>
 
 </body>
+
 </html>

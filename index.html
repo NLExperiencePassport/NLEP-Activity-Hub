@@ -1,5 +1,367 @@
+Pasted text(20260921-024629).txt
+Document
+chat ah te hanova zvt aho amn ity stp, dans le sens hoe itanao lay filter nresahantsika tsaiko na tadidinao na tsia anefa
+
+Eny Jou, tadidiko ilay resaka farany indrindra: date filtering no tianao hovaina, fa tsy ilay Category/Location/Month/Frequency/Registration tsotra fotsiny. Tamin’ny Sep 18 dia efa nataonao tao amin’ny to-do mihitsy hoe “updating the Activity Hub for filtering dates.”
+
+Amin’ity code ity izao, ilay Hub dia mbola manana Month filter (September / October / November / December) ary ny activity sorting dia maka date avy amin’ilay Date text, fa tsy mbola manana filter tena mifototra amin’ny daty, ohatra hoe:
+
+upcoming activities ihany,
+today/this week,
+na automatique manafina ireo efa lasa.
+
+Hitako koa fa ilay filter section misy anao izao dia Category, Location, Month, Frequency, Registration.
+
+Raha ilay niresahantsika taloha no tianao, dia Upcoming / Past no tena logique: default dia aseho ny upcoming, ary mbola afaka mijery past activities raha tiana. Efa nisy resaka koa hoe afaka manala ho azy ireo activities efa tapitra amin’ny affichage principal.
+
+Ka azontsika ovaina amin’io direction io ilay code ❤️
+
+dai ahoana ny manao anzany? sa afaka asiana section hoe izay past acticities dia misy hoe past ato fa mbola afaka aseho amn filtered iany anefa lay izy ? sa ahoana tsaiko hoe azonao ve ny tiako hambara? zany ny hevitro hoe par exemple lasa any ambany ny past activiities ary misy separateur hoe na titre hoe Past activiites fa rehefa manao filtre kosa anefa izy dia mbola mety iany fa misy hoe past activiities dia raha recurring na mbola ho happenning lay activity efa nisy past date tsy makany amn past date izy mdr 
+
+Eny Jou, azoko tsara ilay tianao 😭❤️ ary io mihitsy no structure tsara kokoa noho ilay hoe afenina fotsiny ny past activities.
+
+Ny logique hataoko dia izao:
+
+Normal view
+
+Upcoming & Current Activities
+[activity]
+[activity]
+[recurring activity]
+[activity]
+
+────────────────────────
+
+Past Activities
+[old activity]
+[old activity]
+
+Ny important indrindra: tsy hoe raha efa nisy occurrence iray dia lasa Past ilay recurring activity. Raha mbola misy date iray ho avy, na mbola ao anatin'ny recurring period ilay izy, dia mijanona ao amin'ny Upcoming & Current Activities.
+
+Ohatra:
+
+BLOOM Bachata
+Every Friday, Sept–Dec
+
+Na efa Sept 18 aza no lasa, raha mbola misy Sept 25, Oct, Nov, Dec → tsy Past.
+
+Fa:
+
+Study and Stay NL Showcase
+September 18, 2026
+
+Rehefa lasa Sept 18 → mandeha any ambany ao amin'ny Past Activities.
+
+Ary ilay filter, marina tsara ilay eritreritrao: tsy tokony hanafina ny past database izy. Ataontsika hoe:
+
+ALL ACTIVITIES
+↓
+apply search + filters
+↓
+split filtered results into:
+   1. Upcoming / Current
+   2. Past
+↓
+display both sections
+
+Noho izany raha manao ohatra:
+
+Category = Community & Culture
+
+dia mety hiseho:
+
+Community & Culture
+
+Upcoming & Current
+• BLOOM Bachata
+• Gathering of Voices
+
+Past Activities
+• Local Shorts
+• Big Space Concert
+
+Izany hoe ny filter dia miasa amin'ny past sy future miaraka, fa ilay classification Past/Upcoming no atao aorian'ny filtering. Io no tena logique. ✨
+
+Amin'ny code-nao ankehitriny, ny filterActivities() dia manao filters dia mandefa list iray manontolo any amin'ny displayActivities(). Ary displayActivities() indray dia manao sort amin'ny daty fotsiny ka tsy mbola manavaka past/upcoming.
+
+Fa misy zavatra iray tokony hovaintsika amin'ny Google Sheet
+
+Izaho tsy hampiantehitra an'io amin'ilay Date text fotsiny, satria mety ho toy izao ilay Date:
+
+Every Friday, September–December
+September 18, 2026
+September 17, October 15, November 19
+Every second Friday
+
+Sarotra sy fragile be ny manao JavaScript hahazo tsara ireo rehetra ireo.
+
+Ny solution madio indrindra dia manampy column iray ao amin'ny Google Sheet:
+
+Last Date
+
+Ohatra:
+
+Activity	Date aseho amin'ny student	Last Date
+BLOOM Bachata	Fridays, Sept–Dec	12/04/2026
+Local Shorts	September 16, 2026	09/16/2026
+Coffee Club	Fridays	12/04/2026
+Hands-on Series	Sept 17, Oct 15, Nov 19	11/19/2026
+
+Dia tena simple ny rule:
+
+if (Last Date < today) {
+    Past
+} else {
+    Upcoming / Current
+}
+
+Ka na recurring aza ilay activity, Last Date no jerena. Tsy lasa Past raha mbola misy occurrence iray ho avy.
+
+Ary izaho aza mety hataoko hoe Past Activities collapsed by default rehefa normal browsing:
+
+▸ Past Activities (12)
+
+fa afaka click-na izy dia misokatra. Rehefa manao filter/search kosa, azontsika atao misokatra automatically raha misy past results, mba tsy hieritreretan'ny student hoe tsy nahita result ilay search.
+
+Io no version hitako hoe clean indrindra sy professional indrindra ho an'ny Hub-nao. ❤️
+
+donc ny hevitrao zany asiana hoe Upcoming sy current titre dia hoe Past activities? otrn karazana titre? tsy hapme ve zany?
+
+Eny, karazana titre/separator mihitsy no tiako lazaina — fa tsy mila atao lehibe na mavesatra ka mampisavoritaka 😭❤️
+
+Izaho aza tsy dia tia loatra ilay hoe “Upcoming & Current Activities” satria somary administratif sy lava. Ataoko simple kokoa hoe:
+
+Upcoming Activities
+…cards rehetra mbola relevant…
+
+ary any ambany:
+
+Past Activities
+…cards efa tapitra…
+
+Dia mety asiana line malefaka eo anelanelany. Tsy hapme izy raha clean ny design; contraire, manampy be amin’ny fahazoana hoe iza no mbola azo aleha sy iza no efa lasa.
+
+Ny recurring izay mbola mitohy dia mijanona ao amin’ny Upcoming Activities, na efa nisy daty lasa aza. Izay ihany no rule lehibe.
+
+Raha tianao ho mbola lighter kokoa, afaka atao:
+
+Activities
+[upcoming/current cards]
+
+Past activities
+[past cards]
+
+Izaho manokana dia “Upcoming Activities” + “Past Activities” no hofidiko. Clean, mazava, tsy be resaka.
+
+okay dia lay izy hoe raha 22 sept anio oatra dia misy activity 22 sept dai mbola ao amn upcoming izy no miseho fa raha 23 sept androany dia tonga dia midina any amn past activities izy 
+
+Eny, exactement ❤️
+
+Raha Sept 22 androany:
+
+activity dated Sept 22 → mbola ao amin’ny Upcoming Activities
+
+Raha Sept 23 androany:
+
+ilay activity dated Sept 22 → mandeha ao amin’ny Past Activities
+
+Izany hoe ny rule dia past only when the activity date is strictly before today.
+
+Ho an’ny recurring activity kosa, ny last relevant date no jerena. Raha mbola misy occurrence amin’ny Sept 25 na Oct 2 ohatra, dia mbola Upcoming izy.
+
+oui dia lay opast koa nefa tokony hanaraka chronologie fa tsy andeha ftsn amzao
+
+Oui exactement ❤️ Ny Past Activities koa tokony ho sorted chronologically, fa tsy random.
+
+Izaho hanao azy hoe:
+
+Upcoming Activities → from the nearest date to the farthest date.
+Past Activities → from the most recent past activity going backward.
+
+Ohatra raha Sept 23 androany:
+
+Upcoming Activities
+
+Sept 23
+Sept 25
+Sept 30
+Oct 3
+
+Past Activities
+
+Sept 22
+Sept 20
+Sept 18
+Sept 11
+
+Izany no tena intuitive: ilay vao lasa indrindra no hitan’ny olona voalohany ao amin’ny Past. ❤️
+
+Past Activities → from the most recent past activity going backward. sur ve enao fa zany no logique indrindra?
+
+Oui — mais pas forcément. Pour ton Hub, je pense qu’il y a même une logique plus naturelle ❤️
+
+Pour les Past Activities, je mettrais plutôt ordre chronologique normal : plus ancien → plus récent si tu veux que la section ressemble à un historique du programme. Par exemple : Sept 11, Sept 16, Sept 18, Sept 22.
+
+Mais si l’objectif est surtout que les étudiants retrouvent facilement l’activité qu’ils viennent juste de manquer, alors plus récent → plus ancien est plus pratique.
+
+Pour ton NLEP Hub, je penche finalement pour plus récent → plus ancien, parce que la section Past est secondaire : quand on descend jusque-là, la première chose utile est de voir ce qui vient de se terminer, pas une activité vieille de plusieurs semaines. Donc Sept 22, puis Sept 18, puis Sept 16, puis Sept 11.
+
+Et surtout, Upcoming reste dans l’autre sens : Sept 23 → Sept 25 → Oct 2 → etc. Ça crée un effet logique autour d’aujourd’hui : les dates les plus proches de maintenant sont en haut des deux sections. ❤️
+
+okay ndray arany eh... andao
+
+This chat now uses Work.Undo
+
+Vita Jou ❤️ 
+Download the updated code
+
+Izao ilay Hub:
+
+Manasaraka Upcoming Activities sy Past Activities
+Activity androany mbola Upcoming
+Ampitso vao midina any amin’ny Past
+Upcoming: akaiky indrindra → lavitra indrindra
+Past: vao lasa indrindra → tranainy indrindra
+Recurring activities mbola Upcoming raha mbola misy occurrence
+Filters miasa amin’ireo sections roa
+
+Ao amin’ny Google Sheet, ampio column iray antsoina hoe:
+
+Last Date
+
+Ho an’ny recurring activities no tena fenoy amin’ny daty farany relevant. Ny one-time activities afaka avela blank. Tsy ho simba anefa ilay Hub raha mbola tsy feno izy io satria December 6, 2026 no fallback.
+
+Pasted text(20260921-024629).txt
+Document
+Pasted markdown(20260921-031614).md
+File
+okalouny tsy mbola nkitihako ny codenao fa aoa man google sheet ah zao.... dia inona no fenoiko eo amlay column Last date? tokony ataoko manually sa afaka ampianao zah? 
+
+
+
+Eny, manual, fa ireo Recurring ihany no mila fenoina. Ireo One-time avelao blank satria efa maka ny daty ao amin’ny Date ilay code.
+
+Ataovy exactement hoe Last Date ilay titre, dia fenoy izao:
+
+Activity	Last Date
+BLOOM Bachata Dance	December 4, 2026
+BLOOM Chess Club	December 1, 2026
+BLOOM English Chit-Chat	November 30, 2026
+BLOOM Pilates Class	December 1, 2026
+BLOOM Soccer	December 5, 2026
+BLOOM Wellness Connection Café	December 3, 2026
+Creative Thursdays	November 19, 2026
+Discussion Group	December 2, 2026
+IO Coffee Club	December 4, 2026
+Professional Skills Development Program	November 30, 2026
+WUSC Night	November 20, 2026
+STOP Volunteer Program	December 6, 2026
+Queer International Friday Social	November 13, 2026
+
+Noho izany: tsy mila mameno ny lignes rehetra ianao, ireo 13 recurring ireo ihany. ❤️
+
+ny tena mora amiko raha amenao anlay column zah araka io google sheet nomeko anao io dia copypasterko ftsna vye o
+
+Eny, io no mora indrindra 😭❤️ Tsindrio ilay cellule voalohany amin’ilay column vaovao, L1, dia copy-pasteo manontolo ity:
+
+Last Date
+December 4, 2026
+December 1, 2026
+September 17, 2026
+November 30, 2026
+September 19, 2026
+September 12, 2026
+December 1, 2026
+December 5, 2026
+December 3, 2026
+September 23, 2026
+October 4, 2026
+October 4, 2026
+November 19, 2026
+December 2, 2026
+September 9, 2026
+December 4, 2026
+September 16, 2026
+September 11, 2026
+September 18, 2026
+September 23, 2026
+September 11, 2026
+September 19, 2026
+September 27, 2026
+November 30, 2026
+September 16, 2026
+September 23, 2026
+September 21, 2026
+September 20, 2026
+September 20, 2026
+November 20, 2026
+December 6, 2026
+November 13, 2026
+September 11, 2026
+September 16, 2026
+September 25, 2026
+September 23, 2026
+
+Nataoko feno daholo na ny One-time aza, mba tsy hisy lignes blank ka tena copy-paste iray monja.
+
+copy paste environment for the code? in github dia ataoko ahoan aavy eo ny mienregistrer sy manao lay code ho effective?
+
+Oui Jou. Le plus simple:
+
+Sokafy ity: 
+updated code
+Ataovy ⌘ Command + A, avy eo ⌘ Command + C.
+Mankanesa ao amin’ny GitHub repository NLEP-Activity-Hub.
+Sokafy index.html.
+Tsindrio ilay pencil ✏️ / Edit this file.
+Ao amin’ny code editor: ⌘ Command + A, dia ⌘ Command + V.
+Tsindrio Commit changes…
+Soraty:
+Add Upcoming and Past Activities sections
+Safidio Commit directly to the main branch, dia tsindrio Commit changes.
+Miandrasa 1–2 minutes, sokafy indray ny Hub, dia ataovy ⌘ Command + Shift + R mba hampisehoana ilay version vaovao.
+
+Izay ihany. Tsy mila manao zavatra hafa ao amin’ny GitHub Pages ianao; automatique ilay publication rehefa vita ny commit.
+
+Pasted text(20260921-024629).txt
+Document
+mety zao? 
+
+Eny, mety tsara izao ❤️
+
+Ilay Commit directly to the main branch efa voafidy. Tsindrio fotsiny ilay bokotra maitso Commit changes. Avy eo miandrasa 1–2 minutes dia refresh-o ilay Hub.
+
+tsara ilay izy fa tsy haiko hoe ahoan any faisabilite mba atao manjamanja kokoa lay soratra upcoming actiovities sy past activities surtout hoe otrn zao? dans le sens hoe tsy tokony hatao mifanitsy amn 4 activity found ve stp? sai koa tsaiko heo manana style maha mbla visible na couleu ve enao mba ho manjamanja lay izy?
+dai enfa mandinika anreto iany koa zah dia otrn mapme be lay izy tsiko e
+hitanao zao? 
+
+Eny, hitako tsara. Ilay titre no lasa irery any amin’ny sisiny, fa cards eo afovoany—izay no nampihomehy azy 😭
+
+Efa namboariko:
+
+mifanaraka amin’ny “activities found” ny titre;
+kely kokoa ilay soratra;
+misy count kely: Upcoming Activities 2;
+misy line malefaka manaraka azy;
+manga malefaka ny Upcoming, grey ny Past;
+tsy novaina ny haben’ny cards.
+
+Open the refined code
+
+Avereno fotsiny ilay fomba teo: copy daholo → replace index.html → Commit changes.
+
+Pasted text(20260921-024629).txt
+Document
+ary ilay past activities koa misy count? sa tsy ilaina? dia inoan ny lokony ? ahoana ny style naalay izy? afaka asianao visuel kely alohan ny hicopy pasterko anlay izy?
+
+Eny, Past Activities koa misy count. Upcoming manga malefaka, Past grey-blue malefaka. Ny cards kosa mitazona ny lokon’ny category-ny; ny titre ihany no samy hafa.
+
+Io ilay style efa napetrako amin’ilay code vaovao. Raha tianao io dia afaka copy-pasteo ao GitHub.
+
+Pasted text(20260921-024629).txt
 <!DOCTYPE html>
 <html lang="en">
+
 
   
 <head>
@@ -9,7 +371,9 @@
     content="width=device-width, initial-scale=1.0"
   >
 
+
   <title>NLEP Activity List</title>
+
 
   <style>
     :root {
@@ -23,9 +387,11 @@
       --border: #dce2e6;
     }
 
+
     * {
       box-sizing: border-box;
     }
+
 
     body {
       margin: 0;
@@ -37,6 +403,7 @@
         "Segoe UI",
         Arial,
         sans-serif;
+
 
       background:
         radial-gradient(
@@ -50,2518 +417,20 @@
           var(--background) 460px
         );
 
+
       background-attachment: fixed;
       color: var(--text);
     }
+
 
     /* =========================
        HEADER
        ========================= */
 
+
     header {
       min-height: 440px;
       padding: 58px 20px;
 
+
       display: flex;
-      align-items: center;
-      justify-content: center;
-
-      background:
-        linear-gradient(
-          rgba(10, 25, 36, 0.25),
-          rgba(12, 30, 42, 0.58)
-        ),
-        url("https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Signal_Hill_St_John_Harbour_Newfoundland_%2840469269265%29.jpg/1280px-Signal_Hill_St_John_Harbour_Newfoundland_%2840469269265%29.jpg");
-
-      background-size: cover;
-      background-position: center 53%;
-
-      color: var(--white);
-      text-align: center;
-
-      border-bottom:
-        6px solid rgba(255, 255, 255, 0.82);
-
-      box-shadow:
-        0 8px 28px rgba(38, 52, 61, 0.18);
-    }
-
-    .hero-content {
-      width: min(770px, 100%);
-      padding: 34px 40px 37px;
-
-      background-color:
-        rgba(18, 34, 45, 0.70);
-
-      border:
-        1px solid rgba(255, 255, 255, 0.34);
-
-      border-radius: 22px;
-
-      box-shadow:
-        0 18px 45px rgba(0, 0, 0, 0.28);
-
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
-    }
-
-    .header-label {
-      display: inline-block;
-      margin-bottom: 18px;
-      padding: 8px 15px;
-
-      background-color:
-        rgba(255, 255, 255, 0.94);
-
-      color: #26343d;
-      border-radius: 999px;
-
-      font-size:
-        clamp(14px, 1.8vw, 17px);
-
-      font-weight: 700;
-      letter-spacing: 1.7px;
-    }
-
-    header h1 {
-      margin: 0 0 16px;
-
-      font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-      font-size:
-        clamp(43px, 6vw, 64px);
-
-      font-weight: 700;
-      line-height: 1.08;
-      letter-spacing: -0.5px;
-
-      text-shadow:
-        0 3px 18px rgba(0, 0, 0, 0.30);
-    }
-
-    header p {
-      max-width: 680px;
-      margin: 0 auto;
-
-      font-size: 18px;
-      line-height: 1.55;
-
-      text-shadow:
-        0 2px 10px rgba(0, 0, 0, 0.35);
-    }
-
-    .header-motto {
-      display: block;
-      margin-bottom: 7px;
-
-      font-size: 20px;
-      font-weight: 650;
-    }
-
-    .header-description {
-      color:
-        rgba(255, 255, 255, 0.92);
-    }
-
-    /* =========================
-       SEARCH + FILTERS
-       ========================= */
-
-    main {
-      max-width: 1150px;
-      margin: auto;
-      padding: 38px 20px 26px;
-    }
-
-    .search-controls {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 10px;
-      align-items: stretch;
-
-      margin-bottom: 14px;
-    }
-
-    .search-box {
-      margin: 0;
-    }
-
-    .filter-toggle {
-      min-width: 130px;
-      padding: 13px 16px;
-
-      background-color: var(--brand);
-      color: var(--white);
-
-      border:
-        1px solid var(--brand);
-
-      border-radius: 10px;
-
-      font-size: 15px;
-      font-weight: 700;
-
-      cursor: pointer;
-    }
-
-    .filter-toggle:hover {
-      background-color:
-        var(--brand-dark);
-    }
-
-    .filters-panel {
-      overflow: hidden;
-
-      max-height: 600px;
-      opacity: 1;
-
-      transition:
-        max-height 0.28s ease,
-        opacity 0.22s ease,
-        margin 0.28s ease;
-    }
-
-    .filters-panel.collapsed {
-      max-height: 0;
-      opacity: 0;
-      margin: 0;
-
-      pointer-events: none;
-    }
-
-    input,
-    select,
-    button {
-      font-family: inherit;
-    }
-
-    input,
-    select {
-      width: 100%;
-      padding: 14px;
-
-      font-size: 15px;
-
-      background-color: var(--white);
-
-      border:
-        1px solid var(--border);
-
-      border-radius: 10px;
-    }
-
-    input:focus,
-    select:focus {
-      border-color: var(--brand);
-
-      outline:
-        3px solid rgba(61, 75, 87, 0.14);
-    }
-
-    .filters {
-      display: grid;
-
-      grid-template-columns:
-        repeat(
-          auto-fit,
-          minmax(165px, 1fr)
-        );
-
-      gap: 12px;
-      margin-bottom: 24px;
-    }
-
-    .clear-button {
-      padding: 13px;
-
-      background-color: var(--white);
-      color: var(--brand);
-
-      border:
-        1px solid var(--brand);
-
-      border-radius: 10px;
-
-      font-size: 15px;
-      font-weight: bold;
-
-      cursor: pointer;
-    }
-
-    .clear-button:hover {
-      background-color:
-        var(--brand-soft);
-    }
-
-    .results-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      gap: 15px;
-      margin-bottom: 0;
-    }
-
-    .result-count {
-      margin: 0;
-      color: var(--soft-text);
-    }
-
-    .verification-link {
-  margin: 0;
-  color: var(--soft-text);
-  font-size: 14px;
-  text-align: center;
-}
-
-.verification-link a {
-  color: var(--brand);
-  font-weight: 700;
-}
-    .view-buttons {
-      display: flex;
-      gap: 7px;
-    }
-
-    .view-button {
-      padding: 8px 12px;
-
-      background-color: var(--white);
-      color: #555555;
-
-      border:
-        1px solid var(--border);
-
-      border-radius: 8px;
-
-      cursor: pointer;
-    }
-
-    .view-button.active {
-      background-color: var(--brand);
-      color: var(--white);
-
-      border-color: var(--brand);
-    }
-
-    /* =========================
-       ACTIVITY BACKGROUND
-       ========================= */
-
-    .activities-section {
-      position: relative;
-      overflow: hidden;
-
-      background:
-        linear-gradient(
-          rgba(233, 239, 243, 0.55),
-          rgba(226, 234, 239, 0.62)
-        ),
-        url("images/20260904_165815.jpg");
-
-      background-size: cover;
-      background-position: center center;
-      background-repeat: no-repeat;
-      background-attachment: scroll;
-
-      border-top:
-        1px solid rgba(61, 75, 87, 0.10);
-
-      border-bottom:
-        1px solid rgba(61, 75, 87, 0.12);
-    }
-
-    .activities-inner {
-      max-width: 1380px;
-      margin: 0 auto;
-
-      padding:
-        38px 20px 54px;
-    }
-
-    /* =========================
-       CARD GRID
-       ========================= */
-
-.activity-grid {
-  display: block;
-}
-
-.activity-group-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 16px;
-}
-
-.activity-group-grid .activity-card {
-  flex: 0 1 calc((100% - 48px) / 4);
-}
-
-.activity-section-block + .activity-section-block {
-  margin-top: 48px;
-  padding-top: 38px;
-  border-top: 1px solid rgba(61, 75, 87, 0.2);
-}
-
-.activity-section-heading {
-  margin: 0 0 20px;
-  color: var(--navy);
-  font-size: clamp(24px, 3vw, 32px);
-  line-height: 1.2;
-  text-align: left;
-}
-
-/* List mode */
-.activity-grid.list-view .activity-group-grid {
-  flex-direction: column;
-  align-items: center;
-}
-
-.activity-grid.list-view .activity-card {
-  width: min(900px, 100%);
-  flex: 0 0 auto;
-}
-
-    /* =========================
-       CARDS
-       ========================= */
-
-    .activity-card {
-      display: flex;
-      flex-direction: column;
-
-      padding: 16px;
-
-      background-color: var(--white);
-
-      border:
-        1px solid #e8e8e8;
-
-      border-top:
-        4px solid transparent;
-
-      border-radius: 14px;
-
-      box-shadow:
-        0 8px 24px rgba(38, 52, 61, 0.08);
-
-      transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
-    }
-
-    .activity-card:hover {
-      transform: translateY(-3px);
-
-      box-shadow:
-        0 13px 30px rgba(38, 52, 61, 0.13);
-    }
-
-    /* 💗 Community & Culture */
-    .card-community {
-      background-color: #fff3f8;
-      border-color: #f2d3e0;
-      border-top-color: #c4326a;
-    }
-
-    /* 💛 Career & Integration */
-    .card-career {
-      background-color: #fff9e8;
-      border-color: #efdfab;
-      border-top-color: #bd790d;
-    }
-
-    /* 💚 Social & Wellbeing */
-    .card-social {
-      background-color: #f0faf4;
-      border-color: #cce7d7;
-      border-top-color: #2f8157;
-    }
-
-    /* 💙 Civic Engagement */
-    .card-civic {
-      background-color: #f2f7fd;
-      border-color: #d1e0f2;
-      border-top-color: #3d73aa;
-    }
-
-    .card-top {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-
-      gap: 8px;
-      margin-bottom: 11px;
-
-      flex-wrap: wrap;
-    }
-
-    .activity-card h2 {
-      margin: 0;
-
-      font-size: 18px;
-      line-height: 1.22;
-
-      color: #252525;
-    }
-
-    .category-tag,
-    .location-tag {
-      display: inline-block;
-      width: fit-content;
-
-      padding: 6px 9px;
-
-      border-radius: 18px;
-
-      font-size: 11px;
-      font-weight: bold;
-    }
-
-    /* Category tags */
-
-    .category-community {
-      background-color: #f7dbe8;
-      color: #9d174d;
-    }
-
-    .category-career {
-      background-color: #fbe9ad;
-      color: #92400e;
-    }
-
-    .category-social {
-      background-color: #d2eddc;
-      color: #166534;
-    }
-
-    .category-civic {
-      background-color: #d8e7f7;
-      color: #1e40af;
-    }
-
-    .location-on-campus,
-    .location-off-campus,
-    .location-online {
-      background-color: #e8edf1;
-      color: #3d4952;
-    }
-
-    .card-details {
-      margin: 10px 0;
-      font-size: 14px;
-    }
-
-    .detail-row {
-      display: flex;
-      align-items: flex-start;
-
-      gap: 8px;
-      margin: 7px 0;
-
-      line-height: 1.35;
-    }
-
-    .detail-icon {
-      width: 20px;
-      flex-shrink: 0;
-
-      text-align: center;
-    }
-
-    .description {
-      flex-grow: 1;
-
-      margin: 3px 0 0;
-
-      color: #555555;
-
-      font-size: 14px;
-      line-height: 1.42;
-    }
-
-    .activity-link {
-      display: block;
-
-      margin-top: 14px;
-      padding: 10px 12px;
-
-      background-color: var(--brand);
-      color: var(--white);
-
-      border-radius: 9px;
-
-      text-align: center;
-      text-decoration: none;
-
-      font-weight: bold;
-    }
-
-    /* Category buttons */
-
-    .card-community .activity-link {
-      background-color: #b4265c;
-    }
-
-    .card-community .activity-link:hover {
-      background-color: #8f1947;
-    }
-
-    .card-career .activity-link {
-      background-color: #a9670b;
-    }
-
-    .card-career .activity-link:hover {
-      background-color: #855006;
-    }
-
-    .card-social .activity-link {
-      background-color: #27754e;
-    }
-
-    .card-social .activity-link:hover {
-      background-color: #1d5b3b;
-    }
-
-    .card-civic .activity-link {
-      background-color: #356ca3;
-    }
-
-    .card-civic .activity-link:hover {
-      background-color: #27547f;
-    }
-
-    /* =========================
-       STATUS MESSAGES
-       ========================= */
-
-    .loading,
-    .empty-message,
-    .error-message {
-      padding: 40px 20px;
-
-      background-color: var(--white);
-
-      border-radius: 14px;
-
-      text-align: center;
-
-      color: var(--soft-text);
-    }
-
-    .empty-message,
-    .error-message {
-      display: none;
-    }
-
-    .error-message {
-      color: #991b1b;
-      background-color: #fee2e2;
-    }
-
-    /* =========================
-       FOOTER
-       ========================= */
-
-    .site-footer {
-      padding: 24px 20px 22px;
-
-      background-color: #26343d;
-
-      color:
-        rgba(255, 255, 255, 0.88);
-
-      text-align: center;
-    }
-
-    .site-footer p {
-      margin: 0;
-      line-height: 1.65;
-    }
-
-    .site-footer a {
-      color: #ffffff;
-
-      font-weight: 700;
-
-      text-decoration-thickness: 1px;
-      text-underline-offset: 3px;
-    }
-
-    .photo-credit {
-      display: block;
-
-      margin-top: 11px;
-
-      color:
-        rgba(255, 255, 255, 0.56);
-
-      font-size: 10px;
-    }
-
-    .photo-credit a {
-      color: inherit;
-      font-weight: 400;
-    }
-
-    /* =========================
-       RESPONSIVE
-       ========================= */
-
-    @media (max-width: 1180px) {
-
-      .activity-group-grid .activity-card {
-        flex-basis: calc((100% - 32px) / 3);
-      }
-
-      .activity-grid {
-        grid-template-columns:
-          repeat(
-            3,
-            minmax(0, 1fr)
-          );
-      }
-
-      .activity-grid.results-1 {
-        grid-template-columns:
-          minmax(0, 320px);
-      }
-
-      .activity-grid.results-2 {
-        grid-template-columns:
-          repeat(
-            2,
-            minmax(0, 320px)
-          );
-      }
-
-      .activity-grid.results-3 {
-        grid-template-columns:
-          repeat(
-            3,
-            minmax(0, 300px)
-          );
-      }
-
-      .activity-grid.list-view {
-        grid-template-columns:
-          minmax(0, 850px);
-      }
-    }
-
-    @media (max-width: 820px) {
-
-      .activity-group-grid .activity-card {
-        flex-basis: calc((100% - 16px) / 2);
-      }
-
-      .activity-grid {
-        grid-template-columns:
-          repeat(
-            2,
-            minmax(0, 1fr)
-          );
-      }
-
-      .activity-grid.results-1 {
-        grid-template-columns:
-          minmax(0, 320px);
-      }
-
-      .activity-grid.results-2,
-      .activity-grid.results-3 {
-        grid-template-columns:
-          repeat(
-            2,
-            minmax(0, 1fr)
-          );
-      }
-
-      .activity-grid.list-view {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 650px) {
-
-      .activity-group-grid .activity-card {
-        flex-basis: 100%;
-      }
-
-      header {
-        min-height: 410px;
-        padding: 35px 16px;
-
-        background-position: center;
-      }
-
-      .hero-content {
-        padding: 28px 20px 31px;
-        border-radius: 17px;
-      }
-
-      header h1 {
-        font-size: 42px;
-      }
-
-      header p {
-        font-size: 16px;
-      }
-
-      .header-motto {
-        font-size: 18px;
-      }
-
-      main {
-        padding: 24px 15px;
-      }
-
-      .search-controls {
-        grid-template-columns: 1fr;
-      }
-
-      .filter-toggle {
-        width: 100%;
-      }
-
-      .activities-inner {
-        padding: 34px 15px 46px;
-      }
-
-      .activities-section {
-        background-position: center top;
-      }
-
-      .results-bar {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      .activity-grid,
-      .activity-grid.results-1,
-      .activity-grid.results-2,
-      .activity-grid.results-3,
-      .activity-grid.list-view {
-        grid-template-columns: 1fr;
-        justify-content: stretch;
-      }
-    }
-  </style>
-</head>
-
-<body>
-
-  <header>
-
-    <div class="hero-content">
-
-      <span class="header-label">
-        YOUR NEXT DESTINATION
-      </span>
-
-      <h1>
-        NLEP Activity List
-      </h1>
-
-      <p>
-
-        <span class="header-motto">
-          Explore. Connect. Engage. Grow.
-        </span>
-
-        <span class="header-description">
-          Discover activities, build connections, and make
-          the most of your experience in Newfoundland and Labrador.
-        </span>
-
-      </p>
-
-    </div>
-
-  </header>
-
-  <main>
-
-    <div class="search-controls">
-
-      <div class="search-box">
-
-        <input
-          id="searchInput"
-          type="search"
-          placeholder="🔎 Search by activity, location, or keyword..."
-        >
-
-      </div>
-
-      <button
-        class="filter-toggle"
-        id="filterToggle"
-        type="button"
-        aria-expanded="false"
-        aria-controls="filtersPanel"
-      >
-        Show filters
-      </button>
-
-    </div>
-
-    <div
-      class="filters-panel collapsed"
-      id="filtersPanel"
-    >
-
-      <div class="filters">
-
-        <select id="categoryFilter">
-
-          <option value="All">
-            All categories
-          </option>
-
-          <option value="Community & Culture">
-            Community & Culture
-          </option>
-
-          <option value="Career & Integration">
-            Career & Integration
-          </option>
-
-          <option value="Social & Wellbeing">
-            Social & Wellbeing
-          </option>
-
-          <option value="Civic Engagement">
-            Civic Engagement
-          </option>
-
-        </select>
-
-        <select id="locationFilter">
-
-          <option value="All">
-            All locations
-          </option>
-
-          <option value="On campus">
-            On campus
-          </option>
-
-          <option value="Off campus">
-            Off campus
-          </option>
-
-          <option value="Online">
-            Online
-          </option>
-
-        </select>
-
-        <select id="monthFilter">
-
-          <option value="All">
-            All months
-          </option>
-
-          <option value="September">
-            September
-          </option>
-
-          <option value="October">
-            October
-          </option>
-
-          <option value="November">
-            November
-          </option>
-
-          <option value="December">
-            December
-          </option>
-
-        </select>
-
-        <select id="frequencyFilter">
-
-          <option value="All">
-            One-time and recurring
-          </option>
-
-          <option value="One-time">
-            One-time
-          </option>
-
-          <option value="Recurring">
-            Recurring
-          </option>
-
-        </select>
-
-        <select id="registrationFilter">
-
-          <option value="All">
-            Any registration
-          </option>
-
-          <option value="Required">
-            Registration required
-          </option>
-
-          <option value="Not required">
-            Registration not required
-          </option>
-
-        </select>
-
-        <button
-          class="clear-button"
-          id="clearFilters"
-          type="button"
-        >
-          Clear filters
-        </button>
-
-      </div>
-
-    </div>
-
-  <div class="results-bar">
-
-  <p
-    class="result-count"
-    id="resultCount"
-  >
-    Loading activities...
-  </p>
-
-  <p class="verification-link">
-    Download a
-    <a
-      href="https://munl-my.sharepoint.com/:w:/r/personal/hjun_mun_ca/Documents/NLSIP%203%20Files/03_NLEP%20Participant%20Mgmt/NLEP_Activity_Participation_Form.docx?d=wccdb079d9d4349659754aeee4aeed059&amp;csf=1&amp;web=1&amp;e=6UZPzh"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      Participation Form
-    </a>
-    if needed
-  </p>
-
-  <div class="view-buttons">
-
-    <button
-      class="view-button active"
-      id="cardViewButton"
-      type="button"
-    >
-      ▦ Cards
-    </button>
-
-    <button
-      class="view-button"
-      id="listViewButton"
-      type="button"
-    >
-      ☰ List
-    </button>
-
-  </div>
-
-</div>
-</main>
-  <section
-    class="activities-section"
-    aria-label="Activities"
-  >
-
-    <div class="activities-inner">
-
-      <div
-        class="loading"
-        id="loadingMessage"
-      >
-        Loading activities from Google Sheets...
-      </div>
-
-      <div
-        class="activity-grid"
-        id="activityGrid"
-      ></div>
-
-      <div
-        class="empty-message"
-        id="emptyMessage"
-      >
-        No activities match your search and filters.
-      </div>
-
-      <div
-        class="error-message"
-        id="errorMessage"
-      >
-        The activities could not be loaded.
-        Please check the Google Sheet.
-      </div>
-
-    </div>
-
-  </section>
-
-  <footer class="site-footer">
-
-    <p>
-
-      <strong>
-        Questions? We’re happy to help!
-      </strong>
-
-      <br>
-
-      Contact us at
-
-      <a href="mailto:arrivals@mun.ca">
-        arrivals@mun.ca
-      </a>
-
-      or
-
-      <a href="mailto:crandriamaha@mun.ca">
-        crandriamaha@mun.ca
-      </a>.
-
-      <small class="photo-credit">
-
-        Header photo:
-
-        <a
-          href="https://commons.wikimedia.org/wiki/File:Signal_Hill_St_John_Harbour_Newfoundland_(40469269265).jpg"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Signal Hill
-        </a>
-
-        — Michel Rathwell / CC BY 2.0
-
-      </small>
-
-    </p>
-
-  </footer>
-
-  <script>
-
-    const sheetURL =
-      "https://docs.google.com/spreadsheets/d/e/2PACX-1vQARdvW0HUWWlESQ601ZcBKG3Ti0IR-P6C5hlPpFi7j2Eo5co-U1v3xHOKlA4AY6uhgmoebFB5VhoUJ/pub?gid=0&single=true&output=csv";
-
-    let activities = [];
-
-    const searchInput =
-      document.getElementById("searchInput");
-
-    const categoryFilter =
-      document.getElementById("categoryFilter");
-
-    const locationFilter =
-      document.getElementById("locationFilter");
-
-    const monthFilter =
-      document.getElementById("monthFilter");
-
-    const frequencyFilter =
-      document.getElementById("frequencyFilter");
-
-    const registrationFilter =
-      document.getElementById("registrationFilter");
-
-    const clearFilters =
-      document.getElementById("clearFilters");
-
-    const filterToggle =
-      document.getElementById("filterToggle");
-
-    const filtersPanel =
-      document.getElementById("filtersPanel");
-
-    const activityGrid =
-      document.getElementById("activityGrid");
-
-    const resultCount =
-      document.getElementById("resultCount");
-
-    const loadingMessage =
-      document.getElementById("loadingMessage");
-
-    const emptyMessage =
-      document.getElementById("emptyMessage");
-
-    const errorMessage =
-      document.getElementById("errorMessage");
-
-    const cardViewButton =
-      document.getElementById("cardViewButton");
-
-    const listViewButton =
-      document.getElementById("listViewButton");
-
-    function parseCSV(text) {
-
-      const rows = [];
-
-      let row = [];
-      let cell = "";
-      let insideQuotes = false;
-
-      for (
-        let index = 0;
-        index < text.length;
-        index++
-      ) {
-
-        const character =
-          text[index];
-
-        const nextCharacter =
-          text[index + 1];
-
-        if (
-          character === '"' &&
-          insideQuotes &&
-          nextCharacter === '"'
-        ) {
-
-          cell += '"';
-          index++;
-
-        } else if (
-          character === '"'
-        ) {
-
-          insideQuotes =
-            !insideQuotes;
-
-        } else if (
-          character === "," &&
-          !insideQuotes
-        ) {
-
-          row.push(cell);
-          cell = "";
-
-        } else if (
-          (
-            character === "\n" ||
-            character === "\r"
-          ) &&
-          !insideQuotes
-        ) {
-
-          if (
-            character === "\r" &&
-            nextCharacter === "\n"
-          ) {
-            index++;
-          }
-
-          row.push(cell);
-          rows.push(row);
-
-          row = [];
-          cell = "";
-
-        } else {
-
-          cell += character;
-
-        }
-      }
-
-      if (
-        cell.length > 0 ||
-        row.length > 0
-      ) {
-
-        row.push(cell);
-        rows.push(row);
-
-      }
-
-      return rows;
-    }
-
-    function cleanText(value) {
-
-      return String(
-        value || ""
-      ).trim();
-
-    }
-
-    function safeURL(value) {
-
-      try {
-
-        const url =
-          new URL(value);
-
-        if (
-          url.protocol === "http:" ||
-          url.protocol === "https:"
-        ) {
-
-          return url.href;
-
-        }
-
-      } catch (error) {
-
-        return "#";
-
-      }
-
-      return "#";
-    }
-
-    function escapeHTML(value) {
-
-      return cleanText(value)
-
-        .replaceAll(
-          "&",
-          "&amp;"
-        )
-
-        .replaceAll(
-          "<",
-          "&lt;"
-        )
-
-        .replaceAll(
-          ">",
-          "&gt;"
-        )
-
-        .replaceAll(
-          '"',
-          "&quot;"
-        )
-
-        .replaceAll(
-          "'",
-          "&#039;"
-        );
-    }
-
-    /* =========================
-       CATEGORY CLASSES
-       IMPORTANT:
-       keep return on same line
-       ========================= */
-
-    function getCategoryClass(category) {
-
-      if (
-        category ===
-        "Community & Culture"
-      ) {
-        return "category-community";
-      }
-
-      if (
-        category ===
-        "Career & Integration"
-      ) {
-        return "category-career";
-      }
-
-      if (
-        category ===
-        "Social & Wellbeing"
-      ) {
-        return "category-social";
-      }
-
-      return "category-civic";
-    }
-
-    function getCategoryCardClass(category) {
-
-      if (
-        category ===
-        "Community & Culture"
-      ) {
-        return "card-community";
-      }
-
-      if (
-        category ===
-        "Career & Integration"
-      ) {
-        return "card-career";
-      }
-
-      if (
-        category ===
-        "Social & Wellbeing"
-      ) {
-        return "card-social";
-      }
-
-      return "card-civic";
-    }
-
-    function getLocationClass(locationType) {
-
-      if (
-        locationType ===
-        "On campus"
-      ) {
-        return "location-on-campus";
-      }
-
-      if (
-        locationType ===
-        "Off campus"
-      ) {
-        return "location-off-campus";
-      }
-
-      return "location-online";
-    }
-
-    async function loadActivities() {
-
-      try {
-
-        const response =
-          await fetch(
-            sheetURL,
-            {
-              cache: "no-store"
-            }
-          );
-
-        if (!response.ok) {
-
-          throw new Error(
-            "Google Sheet could not be loaded."
-          );
-
-        }
-
-        const csvText =
-          await response.text();
-
-        const rows =
-          parseCSV(csvText);
-
-        const headers =
-          rows
-            .shift()
-            .map(
-              function(header) {
-
-                return cleanText(
-                  header
-                ).replace(
-                  /^\uFEFF/,
-                  ""
-                );
-
-              }
-            );
-
-        activities =
-          rows
-
-            .filter(
-              function(row) {
-
-                return row.some(
-                  function(cell) {
-
-                    return cleanText(
-                      cell
-                    ) !== "";
-
-                  }
-                );
-
-              }
-            )
-
-            .map(
-              function(row) {
-
-                const item = {};
-
-                headers.forEach(
-                  function(
-                    header,
-                    index
-                  ) {
-
-                    item[header] =
-                      cleanText(
-                        row[index]
-                      );
-
-                  }
-                );
-
-                return {
-
-                  frequency:
-                    item["Frequency"],
-
-                  locationType:
-                    item["Location Type"],
-
-                  location:
-                    item["Location"],
-
-                  category:
-                    item["Category"],
-
-                  name:
-                    item["Activity Name"],
-
-                  link:
-                    item["Activity Link"],
-
-                  months:
-                    item["Months"]
-
-                      .split(",")
-
-                      .map(
-                        function(month) {
-
-                          return month.trim();
-
-                        }
-                      ),
-
-                  date:
-                    item["Date"],
-
-                  nextDate:
-                    item["Next Date"],
-
-                  lastDate:
-                    item["Last Date"] ||
-                    item["End Date"],
-
-                  time:
-                    item["Time"],
-
-                  registration:
-                    item["Registration"],
-
-                  description:
-                    item["Description"]
-
-                };
-              }
-            );
-
-        loadingMessage.style.display =
-          "none";
-
-        errorMessage.style.display =
-          "none";
-
-        displayActivities(
-          activities
-        );
-
-      } catch (error) {
-
-        loadingMessage.style.display =
-          "none";
-
-        activityGrid.innerHTML =
-          "";
-
-        resultCount.textContent =
-          "";
-
-        errorMessage.style.display =
-          "block";
-
-        console.error(error);
-      }
-    }
-    const programEndDate =
-      new Date(2026, 11, 6).getTime();
-
-    const monthNumbers = {
-      january: 0,
-      february: 1,
-      march: 2,
-      april: 3,
-      may: 4,
-      june: 5,
-      july: 6,
-      august: 7,
-      september: 8,
-      october: 9,
-      november: 10,
-      december: 11
-    };
-
-    function getTodayStart() {
-
-      const now = new Date();
-
-      return new Date(
-        now.getFullYear(),
-        now.getMonth(),
-        now.getDate()
-      ).getTime();
-    }
-
-    function getCalendarDates(value) {
-
-      let text = cleanText(value);
-
-      if (!text) {
-        return [];
-      }
-
-      const abbreviations = {
-        Jan: "January",
-        Feb: "February",
-        Mar: "March",
-        Apr: "April",
-        Jun: "June",
-        Jul: "July",
-        Aug: "August",
-        Sep: "September",
-        Sept: "September",
-        Oct: "October",
-        Nov: "November",
-        Dec: "December"
-      };
-
-      Object.keys(abbreviations).forEach(
-        function(shortMonth) {
-
-          text = text.replace(
-            new RegExp(
-              "\\b" +
-              shortMonth +
-              "\\.?(?![A-Za-z])",
-              "gi"
-            ),
-            abbreviations[shortMonth]
-          );
-        }
-      );
-
-      const yearMatches =
-        text.match(/\b20\d{2}\b/g);
-
-      const fallbackYear =
-        yearMatches
-          ? Number(
-              yearMatches[
-                yearMatches.length - 1
-              ]
-            )
-          : new Date().getFullYear();
-
-      const dates = [];
-
-      const monthPattern =
-        /(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{1,2})(?:\s*,?\s*(20\d{2}))?/gi;
-
-      let match;
-
-      while (
-        (
-          match =
-            monthPattern.exec(text)
-        ) !== null
-      ) {
-
-        const year =
-          Number(match[3]) ||
-          fallbackYear;
-
-        const month =
-          monthNumbers[
-            match[1].toLowerCase()
-          ];
-
-        const day =
-          Number(match[2]);
-
-        const timestamp =
-          new Date(
-            year,
-            month,
-            day
-          ).getTime();
-
-        if (!Number.isNaN(timestamp)) {
-          dates.push(timestamp);
-        }
-      }
-
-      const numericPattern =
-        /\b(\d{1,2})\/(\d{1,2})\/(20\d{2})\b/g;
-
-      while (
-        (
-          match =
-            numericPattern.exec(text)
-        ) !== null
-      ) {
-
-        dates.push(
-          new Date(
-            Number(match[3]),
-            Number(match[1]) - 1,
-            Number(match[2])
-          ).getTime()
-        );
-      }
-
-      const isoPattern =
-        /\b(20\d{2})-(\d{1,2})-(\d{1,2})\b/g;
-
-      while (
-        (
-          match =
-            isoPattern.exec(text)
-        ) !== null
-      ) {
-
-        dates.push(
-          new Date(
-            Number(match[1]),
-            Number(match[2]) - 1,
-            Number(match[3])
-          ).getTime()
-        );
-      }
-
-      return Array.from(
-        new Set(dates)
-      ).sort(
-        function(a, b) {
-          return a - b;
-        }
-      );
-    }
-
-    function getActivityEndDate(activity) {
-
-      const enteredLastDates =
-        getCalendarDates(
-          activity.lastDate
-        );
-
-      if (enteredLastDates.length) {
-        return enteredLastDates[
-          enteredLastDates.length - 1
-        ];
-      }
-
-      const dates =
-        getCalendarDates(
-          activity.date
-        );
-
-      const isRecurring =
-        cleanText(
-          activity.frequency
-        ).toLowerCase() ===
-          "recurring";
-
-      if (isRecurring) {
-
-        if (
-          dates.length > 1 &&
-          !/starting/i.test(
-            activity.date
-          )
-        ) {
-          return dates[
-            dates.length - 1
-          ];
-        }
-
-        return programEndDate;
-      }
-
-      return dates.length
-        ? dates[dates.length - 1]
-        : Number.POSITIVE_INFINITY;
-    }
-
-    function getActivityUpcomingDate(
-      activity,
-      today
-    ) {
-
-      const enteredNextDates =
-        getCalendarDates(
-          activity.nextDate
-        );
-
-      const enteredNextDate =
-        enteredNextDates.find(
-          function(date) {
-            return date >= today;
-          }
-        );
-
-      if (enteredNextDate !== undefined) {
-        return enteredNextDate;
-      }
-
-      const dates =
-        getCalendarDates(
-          activity.date
-        );
-
-      const endDate =
-        getActivityEndDate(activity);
-
-      const weeklyMatch =
-        cleanText(activity.date).match(
-          /every\s+(other\s+)?(monday|tuesday|wednesday|thursday|friday|saturday|sunday)/i
-        );
-
-      if (
-        weeklyMatch &&
-        dates.length
-      ) {
-
-        const interval =
-          weeklyMatch[1]
-            ? 14 * 24 * 60 * 60 * 1000
-            : 7 * 24 * 60 * 60 * 1000;
-
-        let nextDate = dates[0];
-
-        let safetyCounter = 0;
-
-        while (
-          nextDate < today &&
-          safetyCounter < 100
-        ) {
-
-          const nextDateObject =
-            new Date(nextDate);
-
-          nextDateObject.setDate(
-            nextDateObject.getDate() +
-            interval /
-              (24 * 60 * 60 * 1000)
-          );
-
-          nextDate =
-            nextDateObject.getTime();
-
-          safetyCounter++;
-        }
-
-        if (nextDate <= endDate) {
-          return nextDate;
-        }
-      }
-
-      const monthlyMatch =
-        cleanText(activity.date).match(
-          /(first|second|third|fourth|last)\s+(monday|tuesday|wednesday|thursday|friday|saturday|sunday)\s+of\s+each\s+month/i
-        );
-
-      if (monthlyMatch) {
-
-        const ordinalNumbers = {
-          first: 1,
-          second: 2,
-          third: 3,
-          fourth: 4
-        };
-
-        const weekdayNumbers = {
-          sunday: 0,
-          monday: 1,
-          tuesday: 2,
-          wednesday: 3,
-          thursday: 4,
-          friday: 5,
-          saturday: 6
-        };
-
-        const ordinal =
-          monthlyMatch[1]
-            .toLowerCase();
-
-        const weekday =
-          weekdayNumbers[
-            monthlyMatch[2]
-              .toLowerCase()
-          ];
-
-        const cursor =
-          new Date(today);
-
-        cursor.setDate(1);
-
-        for (
-          let monthOffset = 0;
-          monthOffset < 18;
-          monthOffset++
-        ) {
-
-          const year =
-            cursor.getFullYear();
-
-          const month =
-            cursor.getMonth();
-
-          let candidate;
-
-          if (ordinal === "last") {
-
-            candidate =
-              new Date(
-                year,
-                month + 1,
-                0
-              );
-
-            candidate.setDate(
-              candidate.getDate() -
-              (
-                candidate.getDay() -
-                weekday +
-                7
-              ) % 7
-            );
-
-          } else {
-
-            candidate =
-              new Date(
-                year,
-                month,
-                1
-              );
-
-            candidate.setDate(
-              1 +
-              (
-                weekday -
-                candidate.getDay() +
-                7
-              ) % 7 +
-              (
-                ordinalNumbers[
-                  ordinal
-                ] - 1
-              ) * 7
-            );
-          }
-
-          const candidateTime =
-            candidate.getTime();
-
-          if (
-            candidateTime >= today &&
-            candidateTime <= endDate
-          ) {
-            return candidateTime;
-          }
-
-          cursor.setMonth(
-            cursor.getMonth() + 1
-          );
-        }
-      }
-
-      const nextExplicitDate =
-        dates.find(
-          function(date) {
-            return date >= today;
-          }
-        );
-
-      if (nextExplicitDate !== undefined) {
-        return nextExplicitDate;
-      }
-
-      return endDate >= today
-        ? endDate
-        : Number.POSITIVE_INFINITY;
-    }
-
-    function displayActivities(
-  activityList
-) {
-
-  const activityCount =
-    activityList.length;
-
-  const today =
-    getTodayStart();
-
-  const upcomingActivities =
-    activityList
-      .filter(
-        function(activity) {
-          return (
-            getActivityEndDate(activity) >=
-            today
-          );
-        }
-      )
-      .sort(
-        function(a, b) {
-          return (
-            getActivityUpcomingDate(
-              a,
-              today
-            ) -
-            getActivityUpcomingDate(
-              b,
-              today
-            )
-          );
-        }
-      );
-
-  const pastActivities =
-    activityList
-      .filter(
-        function(activity) {
-          return (
-            getActivityEndDate(activity) <
-            today
-          );
-        }
-      )
-      .sort(
-        function(a, b) {
-          return (
-            getActivityEndDate(b) -
-            getActivityEndDate(a)
-          );
-        }
-      );
-
-  activityList = [];
-
-  if (upcomingActivities.length) {
-
-    activityList.push({
-      isSectionHeading: true,
-      title: "Upcoming Activities"
-    });
-
-    activityList.push(
-      ...upcomingActivities
-    );
-  }
-
-  if (pastActivities.length) {
-
-    activityList.push({
-      isSectionHeading: true,
-      title: "Past Activities"
-    });
-
-    activityList.push(
-      ...pastActivities
-    );
-  }
-
-  activityGrid.innerHTML =
-    "";
-
-      activityGrid.classList.remove(
-        "results-1",
-        "results-2",
-        "results-3"
-      );
-
-      if (
-        activityCount >= 1 &&
-        activityCount <= 3
-      ) {
-
-        activityGrid.classList.add(
-          "results-" +
-          activityCount
-        );
-
-      }
-
-      if (
-        activityCount === 1
-      ) {
-
-        resultCount.textContent =
-          "1 activity found";
-
-      } else {
-
-        resultCount.textContent =
-          activityCount +
-          " activities found";
-
-      }
-
-      if (
-        activityCount === 0
-      ) {
-
-        emptyMessage.style.display =
-          "block";
-
-        return;
-      }
-
-      emptyMessage.style.display =
-        "none";
-
-      let currentGroupGrid = null;
-
-      activityList.forEach(
-        function(activity) {
-
-          if (activity.isSectionHeading) {
-
-            const section =
-              document.createElement(
-                "section"
-              );
-
-            section.className =
-              "activity-section-block";
-
-            const heading =
-              document.createElement(
-                "h2"
-              );
-
-            heading.className =
-              "activity-section-heading";
-
-            heading.textContent =
-              activity.title;
-
-            currentGroupGrid =
-              document.createElement(
-                "div"
-              );
-
-            currentGroupGrid.className =
-              "activity-group-grid";
-
-            section.appendChild(
-              heading
-            );
-
-            section.appendChild(
-              currentGroupGrid
-            );
-
-            activityGrid.appendChild(
-              section
-            );
-
-            return;
-          }
-
-          const card =
-            document.createElement(
-              "article"
-            );
-
-          card.className =
-            "activity-card " +
-            getCategoryCardClass(
-              activity.category
-            );
-
-          const link =
-            safeURL(
-              activity.link
-            );
-
-          card.innerHTML = `
-
-            <div class="card-top">
-
-              <span class="
-                category-tag
-                ${getCategoryClass(
-                  activity.category
-                )}
-              ">
-                ${escapeHTML(
-                  activity.category
-                )}
-              </span>
-
-              <span class="
-                location-tag
-                ${getLocationClass(
-                  activity.locationType
-                )}
-              ">
-                ${escapeHTML(
-                  activity.locationType
-                )}
-              </span>
-
-            </div>
-
-            <h2>
-              ${escapeHTML(
-                activity.name
-              )}
-            </h2>
-
-            <div class="card-details">
-
-              <div class="detail-row">
-
-                <span class="detail-icon">
-                  📅
-                </span>
-
-                <span>
-                  <strong>Date:</strong>
-                  ${escapeHTML(
-                    activity.date
-                  )}
-                </span>
-
-              </div>
-
-              <div class="detail-row">
-
-                <span class="detail-icon">
-                  🕒
-                </span>
-
-                <span>
-                  <strong>Time:</strong>
-                  ${escapeHTML(
-                    activity.time
-                  )}
-                </span>
-
-              </div>
-
-              ${
-                activity.location
-
-                ? `
-
-                  <div class="detail-row">
-
-                    <span class="detail-icon">
-                      📍
-                    </span>
-
-                    <span>
-                      <strong>Location:</strong>
-                      ${escapeHTML(
-                        activity.location
-                      )}
-                    </span>
-
-                  </div>
-
-                `
-
-                : ""
-              }
-
-              <div class="detail-row">
-
-                <span class="detail-icon">
-                  🔁
-                </span>
-
-                <span>
-                  <strong>Frequency:</strong>
-                  ${escapeHTML(
-                    activity.frequency
-                  )}
-                </span>
-
-              </div>
-
-              <div class="detail-row">
-
-                <span class="detail-icon">
-                  📝
-                </span>
-
-                <span>
-                  <strong>Registration:</strong>
-                  ${escapeHTML(
-                    activity.registration
-                  )}
-                </span>
-
-              </div>
-
-            </div>
-
-            <p class="description">
-              ${escapeHTML(
-                activity.description
-              )}
-            </p>
-
-            <a
-              class="activity-link"
-              href="${link}"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              View activity
-            </a>
-
-          `;
-
-          currentGroupGrid.appendChild(
-            card
-          );
-
-        }
-      );
-    }
-
-    function filterActivities() {
-
-      const searchText =
-        searchInput.value
-          .trim()
-          .toLowerCase();
-
-      const selectedCategory =
-        categoryFilter.value;
-
-      const selectedLocation =
-        locationFilter.value;
-
-      const selectedMonth =
-        monthFilter.value;
-
-      const selectedFrequency =
-        frequencyFilter.value;
-
-      const selectedRegistration =
-        registrationFilter.value;
-
-      const filteredActivities =
-        activities.filter(
-          function(activity) {
-
-            const searchableText = `
-              ${activity.name}
-              ${activity.category}
-              ${activity.date}
-              ${activity.time}
-              ${activity.locationType}
-              ${activity.location}
-              ${activity.frequency}
-              ${activity.registration}
-              ${activity.description}
-            `.toLowerCase();
-
-            const matchesSearch =
-              searchableText.includes(
-                searchText
-              );
-
-            const matchesCategory =
-              selectedCategory ===
-                "All" ||
-              activity.category ===
-                selectedCategory;
-
-            const matchesLocation =
-              selectedLocation ===
-                "All" ||
-              activity.locationType ===
-                selectedLocation;
-
-            const matchesMonth =
-              selectedMonth ===
-                "All" ||
-              activity.months.includes(
-                selectedMonth
-              );
-
-            const matchesFrequency =
-              selectedFrequency ===
-                "All" ||
-              activity.frequency ===
-                selectedFrequency;
-
-            const matchesRegistration =
-              selectedRegistration ===
-                "All" ||
-              activity.registration ===
-                selectedRegistration;
-
-            return (
-              matchesSearch &&
-              matchesCategory &&
-              matchesLocation &&
-              matchesMonth &&
-              matchesFrequency &&
-              matchesRegistration
-            );
-
-          }
-        );
-
-      displayActivities(
-        filteredActivities
-      );
-    }
-
-    searchInput.addEventListener(
-      "input",
-      filterActivities
-    );
-
-    categoryFilter.addEventListener(
-      "change",
-      filterActivities
-    );
-
-    locationFilter.addEventListener(
-      "change",
-      filterActivities
-    );
-
-    monthFilter.addEventListener(
-      "change",
-      filterActivities
-    );
-
-    frequencyFilter.addEventListener(
-      "change",
-      filterActivities
-    );
-
-    registrationFilter.addEventListener(
-      "change",
-      filterActivities
-    );
-
-    filterToggle.addEventListener(
-      "click",
-      function() {
-
-        const isCollapsed =
-          filtersPanel
-            .classList
-            .toggle(
-              "collapsed"
-            );
-
-        filterToggle.setAttribute(
-          "aria-expanded",
-          String(
-            !isCollapsed
-          )
-        );
-
-        filterToggle.textContent =
-          isCollapsed
-            ? "Show filters"
-            : "Hide filters";
-
-      }
-    );
-
-    clearFilters.addEventListener(
-      "click",
-      function() {
-
-        searchInput.value =
-          "";
-
-        categoryFilter.value =
-          "All";
-
-        locationFilter.value =
-          "All";
-
-        monthFilter.value =
-          "All";
-
-        frequencyFilter.value =
-          "All";
-
-        registrationFilter.value =
-          "All";
-
-        filterActivities();
-
-      }
-    );
-
-    cardViewButton.addEventListener(
-      "click",
-      function() {
-
-        activityGrid.classList.remove(
-          "list-view"
-        );
-
-        cardViewButton.classList.add(
-          "active"
-        );
-
-        listViewButton.classList.remove(
-          "active"
-        );
-
-      }
-    );
-
-    listViewButton.addEventListener(
-      "click",
-      function() {
-
-        activityGrid.classList.add(
-          "list-view"
-        );
-
-        listViewButton.classList.add(
-          "active"
-        );
-
-        cardViewButton.classList.remove(
-          "active"
-        );
-
-      }
-    );
-
-    loadActivities();
-
-  </script>
-
-</body>
-
-</html>

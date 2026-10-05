@@ -2641,23 +2641,20 @@
       count
     ) {
 
-      if (
-        type === "upcoming"
-      ) {
-
+      if (type === "one-time") {
         return count === 1
-
-          ? "Upcoming Activity"
-
-          : "Upcoming Activities";
-
+          ? "One-Time Activity"
+          : "One-Time Activities";
       }
 
+      if (type === "recurring") {
+        return count === 1
+          ? "Recurring Activity"
+          : "Recurring Activities";
+      }
 
       return count === 1
-
         ? "Past Activity"
-
         : "Past Activities";
 
     }
@@ -3030,22 +3027,39 @@
       const activityCount =
         activityList.length;
 
-
       const today =
         getTodayStart();
 
 
       const upcomingActivities =
-        activityList
+        activityList.filter(
+          function(activity) {
+
+            return (
+              getActivityEndDate(
+                activity
+              ) >= today
+            );
+
+          }
+        );
+
+
+      /* =====================================
+         ONE-TIME ACTIVITIES
+         nearest date first
+         ===================================== */
+
+      const oneTimeActivities =
+        upcomingActivities
 
           .filter(
             function(activity) {
 
-              return (
-                getActivityEndDate(
-                  activity
-                ) >= today
-              );
+              return cleanText(
+                activity.frequency
+              ).toLowerCase() ===
+                "one-time";
 
             }
           )
@@ -3067,6 +3081,155 @@
             }
           );
 
+
+      /* =====================================
+         RECURRING ACTIVITIES
+
+         1. Weekly Monday -> Sunday
+         2. Recurring with exact dates
+         3. Recurring without exact dates
+         ===================================== */
+
+      const weekdayOrder = {
+        monday: 1,
+        tuesday: 2,
+        wednesday: 3,
+        thursday: 4,
+        friday: 5,
+        saturday: 6,
+        sunday: 7
+      };
+
+
+      function getRecurringSortInfo(
+        activity
+      ) {
+
+        const dateText =
+          cleanText(
+            activity.date
+          ).toLowerCase();
+
+
+        const weeklyMatch =
+          dateText.match(
+            /every\s+(?:other\s+)?(monday|tuesday|wednesday|thursday|friday|saturday|sunday)/i
+          );
+
+
+        if (
+          weeklyMatch
+        ) {
+
+          return {
+            group: 1,
+            order:
+              weekdayOrder[
+                weeklyMatch[1]
+                  .toLowerCase()
+              ]
+          };
+
+        }
+
+
+        const exactDates =
+          getCalendarDates(
+            activity.date
+          );
+
+
+        if (
+          exactDates.length
+        ) {
+
+          return {
+            group: 2,
+            order:
+              getActivityUpcomingDate(
+                activity,
+                today
+              )
+          };
+
+        }
+
+
+        return {
+          group: 3,
+          order:
+            Number.POSITIVE_INFINITY
+        };
+
+      }
+
+
+      const recurringActivities =
+        upcomingActivities
+
+          .filter(
+            function(activity) {
+
+              return cleanText(
+                activity.frequency
+              ).toLowerCase() ===
+                "recurring";
+
+            }
+          )
+
+          .sort(
+            function(a, b) {
+
+              const aInfo =
+                getRecurringSortInfo(a);
+
+              const bInfo =
+                getRecurringSortInfo(b);
+
+
+              if (
+                aInfo.group !==
+                bInfo.group
+              ) {
+
+                return (
+                  aInfo.group -
+                  bInfo.group
+                );
+
+              }
+
+
+              if (
+                aInfo.order !==
+                bInfo.order
+              ) {
+
+                return (
+                  aInfo.order -
+                  bInfo.order
+                );
+
+              }
+
+
+              return cleanText(
+                a.name
+              ).localeCompare(
+                cleanText(
+                  b.name
+                )
+              );
+
+            }
+          );
+
+
+      /* =====================================
+         PAST ACTIVITIES
+         unchanged
+         ===================================== */
 
       const pastActivities =
         activityList
@@ -3128,7 +3291,6 @@
         emptyMessage.style.display =
           "block";
 
-
         return;
 
       }
@@ -3139,8 +3301,14 @@
 
 
       addSection(
-        "upcoming",
-        upcomingActivities
+        "one-time",
+        oneTimeActivities
+      );
+
+
+      addSection(
+        "recurring",
+        recurringActivities
       );
 
 

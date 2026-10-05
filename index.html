@@ -3024,9 +3024,13 @@
       );
 
 
-      titleRow.appendChild(
-        count
-      );
+      if (
+        type === "past"
+      ) {
+        titleRow.appendChild(
+          count
+        );
+      }
 
 
       titleRow.appendChild(

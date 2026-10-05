@@ -516,6 +516,52 @@
     }
 
 
+    /* Upcoming parent heading */
+
+    .upcoming-parent-heading {
+      margin: 0 auto 26px;
+      max-width: 1260px;
+    }
+
+    .upcoming-parent-heading
+    .activity-section-heading {
+      font-size: clamp(24px, 3vw, 31px);
+    }
+
+
+    /* Smaller headings inside Upcoming */
+
+    .upcoming-subsection {
+      margin-top: 0;
+      padding-top: 0;
+    }
+
+    .upcoming-subsection +
+    .upcoming-subsection {
+      margin-top: 38px;
+      padding-top: 0;
+    }
+
+    .upcoming-subsection
+    .activity-section-title-row {
+      margin-bottom: 18px;
+    }
+
+    .upcoming-subsection
+    .activity-section-heading {
+      font-size: clamp(18px, 2vw, 22px);
+      font-weight: 650;
+    }
+
+    .upcoming-subsection
+    .activity-section-count {
+      min-width: 34px;
+      height: 34px;
+      padding: 0 10px;
+      font-size: 15px;
+    }
+
+
     /* Past heading only */
 
     .past-section
@@ -2910,6 +2956,18 @@
       }
 
 
+      if (
+        type === "one-time" ||
+        type === "recurring"
+      ) {
+
+        section.classList.add(
+          "upcoming-subsection"
+        );
+
+      }
+
+
       const titleRow =
         document.createElement(
           "div"
@@ -3298,6 +3356,73 @@
 
       emptyMessage.style.display =
         "none";
+
+
+      if (
+        oneTimeActivities.length ||
+        recurringActivities.length
+      ) {
+
+        const upcomingHeading =
+          document.createElement(
+            "div"
+          );
+
+        upcomingHeading.className =
+          "activity-section-title-row upcoming-parent-heading";
+
+
+        const upcomingTitle =
+          document.createElement(
+            "h2"
+          );
+
+        upcomingTitle.className =
+          "activity-section-heading";
+
+        upcomingTitle.textContent =
+          "Upcoming Activities";
+
+
+        const upcomingCount =
+          document.createElement(
+            "span"
+          );
+
+        upcomingCount.className =
+          "activity-section-count";
+
+        upcomingCount.textContent =
+          oneTimeActivities.length +
+          recurringActivities.length;
+
+
+        const upcomingLine =
+          document.createElement(
+            "span"
+          );
+
+        upcomingLine.className =
+          "activity-section-line";
+
+
+        upcomingHeading.appendChild(
+          upcomingTitle
+        );
+
+        upcomingHeading.appendChild(
+          upcomingCount
+        );
+
+        upcomingHeading.appendChild(
+          upcomingLine
+        );
+
+        activityGrid.appendChild(
+          upcomingHeading
+        );
+
+      }
 
 
       addSection(
